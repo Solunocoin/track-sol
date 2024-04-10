@@ -1,12 +1,9 @@
-const TokenHolders = async ({ tokenAddress }: ITokenHolders) => {
-  // const holders = await getTokenHolders(tokenAddress);
+import getTokenHolders from '@/utils/getTokenHolders';
 
-  return (
-    <h4>
-      10231
-      {/* {holders.length} */}
-    </h4>
-  );
+const TokenHolders = async ({ tokenAddress }: ITokenHolders) => {
+  const holders = await getTokenHolders(tokenAddress);
+
+  return <h4>{holders.length}</h4>;
 };
 
 export default TokenHolders;
