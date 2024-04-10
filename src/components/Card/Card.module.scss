@@ -1,0 +1,72 @@
+@import '../../scss/breakpoints';
+
+.tokenCardWrapper {
+  position: relative;
+  max-width: 600px;
+  width: 100%;
+  background: linear-gradient(
+    15deg,
+    rgba(46, 81, 245, 0.5) 0%,
+    rgba(64, 224, 255, 0.5) 23%,
+    rgba(240, 20, 178, 0.5) 49%,
+    rgba(253, 223, 6, 0.5) 77%,
+    rgba(245, 138, 37, 0.5) 100%
+  );
+  border-radius: 22px; // Adjusted for mobile
+  padding: 2px;
+  overflow: visible;
+  border: 2px solid #0c0e1c;
+  box-shadow: 0 30px 30px -20px black;
+  margin: 3rem auto;
+
+  &:before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    filter: blur(80px);
+    transform: scale(0.82);
+    background: linear-gradient(
+      15deg,
+      rgba(46, 81, 245, 0.5) 0%,
+      rgba(64, 224, 255, 0.5) 23%,
+      rgba(240, 20, 178, 0.5) 49%,
+      rgba(253, 223, 6, 0.5) 77%,
+      rgba(245, 138, 37, 0.5) 100%
+    );
+  }
+
+  @include bp-m {
+    border-radius: 33px; // Original border-radius for screens larger than 576px
+  }
+}
+
+.tokenCard {
+  position: relative;
+  background: #0c0e1c;
+  max-width: 600px;
+  width: 100%;
+  z-index: 5;
+  border-radius: 1.25rem; // Base style adjusted for the smallest screen
+  padding: 0.75rem; // Base style adjusted for the smallest screen
+  transition: all 0.3s ease-in-out;
+
+  @include bp-xs {
+    padding: 1rem;
+  }
+
+  @include bp-s {
+    // Adjustments for screens larger than 415px
+    padding: 1.25rem 1rem;
+  }
+
+  @include bp-m {
+    // Adjustments for screens larger than 576px
+    padding: 1.5rem;
+    border-radius: 30px;
+  }
+}

@@ -1,0 +1,48 @@
+$breakpoint-xs: 375px;
+$breakpoint-s: 480px;
+$breakpoint-m: 640px;
+$breakpoint-l: 768px;
+$breakpoint-xl: 1024px;
+$breakpoint-xxl: 1300px;
+
+// Mixin for extra-small devices
+@mixin bp-xs {
+  @media (min-width: $breakpoint-xs) {
+    @content;
+  }
+}
+
+// Mixin for small devices
+@mixin bp-s {
+  @media (min-width: $breakpoint-s) {
+    @content;
+  }
+}
+
+// Mixin for medium devices
+@mixin bp-m {
+  @media (min-width: $breakpoint-m) {
+    @content;
+  }
+}
+
+// Mixin for large devices
+@mixin bp-l {
+  @media (min-width: $breakpoint-l) {
+    @content;
+  }
+}
+
+// Mixin for extra-large devices
+@mixin bp-xl {
+  @media (min-width: $breakpoint-xl) {
+    @content;
+  }
+}
+
+// Mixin for double extra-large devices
+@mixin bp-xxl {
+  @media (min-width: $breakpoint-xxl) {
+    @content;
+  }
+}

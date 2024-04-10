@@ -1,0 +1,111 @@
+@import '../../scss/breakpoints';
+
+.navbarWrapper {
+  width: 100%;
+  height: min-content;
+  position: relative;
+
+  &::after {
+    content: '';
+    width: 100vw;
+    height: 2px;
+    position: absolute;
+    bottom: -2px;
+    background: linear-gradient(
+      15deg,
+      rgba(46, 81, 245, 0.5) 0%,
+      rgba(64, 224, 255, 0.5) 23%,
+      rgba(240, 20, 178, 0.5) 49%,
+      rgba(253, 223, 6, 0.5) 77%,
+      rgba(245, 138, 37, 0.5) 100%
+    );
+    opacity: 0.7;
+    z-index: 2;
+  }
+}
+
+// NavStyled conversion
+.navbar {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 1rem;
+  row-gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding: 0.5em; // Default for mobile
+  background-color: #0c0e1c;
+  z-index: 99;
+
+  @include bp-xs {
+    padding: 1rem;
+  }
+
+  @include bp-l {
+    grid-template-columns: 1fr 2fr 0.5fr;
+  }
+
+  @include bp-xl {
+    grid-template-columns: 1fr 2fr 1fr;
+  }
+}
+
+// NavLogo conversion
+.navbarLogo {
+  font-family: 'Barlow Condensed', sans-serif;
+  display: flex;
+
+  a {
+    color: #fff;
+    display: flex;
+    align-items: center;
+  }
+
+  h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.5em;
+    color: #fff;
+    letter-spacing: 0;
+    line-height: 0.9em;
+    margin-bottom: 0;
+  }
+
+  img {
+    margin-right: 0.5em;
+    height: 40px; // Default for mobile
+
+    @include bp-xs {
+      height: 44px;
+    }
+  }
+
+  h5 {
+    font-weight: normal;
+    color: #fff;
+    letter-spacing: 1px;
+  }
+
+  span {
+    color: #0c0e1c;
+    font-weight: 700;
+    background: -webkit-linear-gradient(
+      0deg,
+      #57a5fd 0%,
+      #fd1e9f 50%,
+      #fbc341 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-stroke: 2px transparent;
+    padding: 0px 2px;
+  }
+}
+
+.navbarLinks {
+  padding: 1em 0em;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}

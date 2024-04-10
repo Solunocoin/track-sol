@@ -1,0 +1,15 @@
+@import '../../../../scss/breakpoints';
+
+.tokenDetailsItemInner {
+  height: 18px;
+}
+
+.tokenDetailsTradeBtnContainer {
+  width: 100%;
+  height: 40px;
+  grid-column: 1 / -1;
+
+  @include bp-s {
+    grid-column: 4 / 5;
+  }
+}

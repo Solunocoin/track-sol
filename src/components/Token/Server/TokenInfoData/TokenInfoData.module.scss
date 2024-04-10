@@ -1,0 +1,43 @@
+@import '../../../../scss/breakpoints';
+
+.tokenInfoData {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.tokenInfoDataName {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  h4 {
+    font-size: 0.9rem;
+    line-height: 1em;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+    text-align: right;
+  }
+
+  h5 {
+    color: #bcc2ed;
+    font-size: 0.9rem;
+    font-weight: 300;
+  }
+}
+
+.tokenInfoDataLogo {
+  display: flex;
+  height: 32px;
+  width: 32px;
+  margin-left: 0.5em;
+  border-radius: 100%;
+  background-color: rgba(118, 142, 227, 0.4);
+  border: 1px solid rgba(118, 142, 227, 0);
+  align-self: center;
+
+  @include bp-xs {
+    width: 40px;
+    height: 40px;
+  }
+}

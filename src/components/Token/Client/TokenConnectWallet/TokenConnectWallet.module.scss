@@ -1,0 +1,48 @@
+@import '../../../../scss/breakpoints';
+
+.tokenConnectWallet {
+  position: relative;
+  width: 100%;
+  color: #fff;
+  padding: 1rem;
+  margin: 0;
+  font-size: 1.2em;
+  font-weight: 700;
+  border-radius: 1em;
+  background-color: #16225d;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 600px;
+  transition: 0.3s;
+  z-index: 1;
+  box-shadow: inset 0px 1px 1px rgba(127, 143, 255, 0.25);
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  h4 {
+    z-index: 3;
+    padding-right: 0rem;
+  }
+
+  h5 {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  span {
+    color: #bcc2ed;
+  }
+}
+
+.tokenConnectWalletBtnWrapper {
+  margin-top: 1rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}

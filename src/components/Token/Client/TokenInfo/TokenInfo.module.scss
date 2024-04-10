@@ -1,0 +1,28 @@
+@import '../../../../scss/breakpoints';
+
+.tokenInfoWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+
+  h2 {
+    font-size: 1.2rem;
+    line-height: 1em;
+    margin-bottom: 0.2rem;
+    letter-spacing: normal;
+    width: max-content;
+    margin-right: 1rem;
+  }
+  p {
+    font-size: 0.9rem;
+    line-height: 1.2em;
+  }
+}
+
+.tokenInfoDataWrapper {
+  height: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}

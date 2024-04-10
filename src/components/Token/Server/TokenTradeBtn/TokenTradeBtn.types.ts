@@ -1,0 +1,3 @@
+interface ITokenHolders {
+  tokenAddress: string;
+}

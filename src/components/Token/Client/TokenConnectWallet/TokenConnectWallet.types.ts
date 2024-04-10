@@ -1,0 +1,3 @@
+interface ITokenConnectWallet {
+  tokenAddress: string;
+}

@@ -1,0 +1,27 @@
+.button {
+  color: #fff;
+  border: none;
+  border-radius: 1rem;
+  transition: 0.3s;
+  background-color: rgba(118, 142, 227, 0.4);
+  background-size: 260% auto;
+  background-position: left;
+  width: 100%;
+  padding: 0.85rem 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(118, 142, 227, 0.6);
+  }
+}
+
+.buttonDisabled {
+  background-color: rgba(118, 142, 227, 0.1);
+  cursor: not-allowed;
+
+  &:hover {
+    background-color: rgba(118, 142, 227, 0.1);
+  }
+}

@@ -1,0 +1,9 @@
+@import '../../../../scss/breakpoints';
+
+.tokenMoreDetails {
+  grid-template-columns: 1fr 1fr 1fr; // Adjusted for mobile first
+}
+
+.tokenMoreDetailsItemInner {
+  height: 18px;
+}

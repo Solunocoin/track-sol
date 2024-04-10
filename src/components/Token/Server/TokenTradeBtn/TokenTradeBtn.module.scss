@@ -1,0 +1,33 @@
+@import '../../../../scss/breakpoints';
+
+.tokenTradeBtn {
+  position: relative;
+  margin-bottom: 1rem;
+  min-height: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: #fff;
+  border: none;
+  transition: 0.3s;
+  background-color: rgba(118, 142, 227, 0.4);
+  width: 100%;
+  border-radius: 0.75em;
+  font-size: 0.8em;
+  font-weight: 700;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(118, 142, 227, 0.6);
+  }
+}
+
+.tokenTradeBtnDisabled {
+  background-color: rgba(118, 142, 227, 0.2);
+  cursor: not-allowed;
+
+  &:hover {
+    background-color: rgba(118, 142, 227, 0.2);
+  }
+}

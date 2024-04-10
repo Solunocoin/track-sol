@@ -1,0 +1,30 @@
+.logoLink {
+  display: block;
+  position: relative;
+
+  img {
+    height: 31px;
+    padding: 4px;
+    transition: transform 0.2s ease-in-out;
+    text-align: center;
+    vertical-align: middle;
+
+    &:hover {
+      transform: rotate(15deg);
+    }
+  }
+
+  background-color: rgba(162, 177, 228, 0.2);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 0.75em;
+  text-align: center;
+  vertical-align: middle;
+  margin-left: 0.5em;
+  transition: 0.3s;
+
+  &:hover {
+    background-color: rgba(162, 177, 228, 0.4);
+  }
+}

@@ -1,0 +1,3 @@
+interface ITokenDetails {
+  tokenAddress: string;
+}

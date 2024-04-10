@@ -1,0 +1,373 @@
+@import '../../scss/breakpoints';
+
+// PageWrapper component
+.indexPageWrapper {
+  position: relative;
+  width: 100%;
+
+  &:before {
+    position: absolute;
+    content: '';
+    top: -200px;
+    left: 0;
+    right: 0;
+    width: 440px;
+    height: 440px;
+    border-radius: 15rem;
+    background: linear-gradient(180deg, #ef516d 0%, rgba(239, 81, 109, 0) 100%),
+      radial-gradient(
+        94.51% 124.88% at 94.32% 94.43%,
+        rgba(65, 244, 255, 0.78) 0%,
+        rgba(131, 218, 255, 0.6552) 32.29%,
+        rgba(99, 175, 240, 0.3978) 64.06%,
+        rgba(43, 90, 211, 0) 100%
+      ),
+      linear-gradient(313.04deg, #341d65 0.93%, #604aea 125.68%);
+    background-blend-mode: normal, normal, normal, normal, normal, normal;
+    filter: blur(200px);
+    opacity: 0.5;
+  }
+}
+
+// Hero component
+.indexHero {
+  position: relative;
+  margin: auto;
+  max-width: 1200px;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  background-image: url('../../../public/hero_visual.png');
+  background-position: top;
+  background-size: auto 60%;
+  background-repeat: no-repeat;
+
+  @include bp-l {
+    background-position: center right;
+    background-size: 65% auto;
+  }
+}
+
+// HeroStickyWrapper component
+.indexHeroStickyWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 2em;
+
+  @include bp-l {
+    justify-content: start;
+    padding: 5em;
+  }
+}
+
+// HeroSticky component
+.indexHeroSticky {
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+
+  h1 {
+    font-size: 2em;
+    font-weight: 700;
+    font-style: italic;
+    margin-top: 30rem;
+    margin-bottom: 0.7em;
+  }
+
+  p {
+    font-size: 1.2em;
+    max-width: 410px;
+    margin: auto;
+  }
+
+  span {
+    color: #0c0e1c;
+    font-weight: 700;
+    background: -webkit-linear-gradient(
+      0deg,
+      #57a5fd 0%,
+      #fd1e9f 50%,
+      #fbc341 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-stroke: 2px transparent;
+    padding: 0px 2px;
+  }
+
+  @include bp-l {
+    width: 50%;
+    text-align: left;
+
+    h1 {
+      margin-top: 1em;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+.indexLaunchButtonWrapper {
+  width: 9em;
+  margin: 2em auto 0;
+
+  @include bp-l {
+    margin: 2em 0 0;
+  }
+}
+
+// OverviewWrapper component
+.indexOverviewWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 3em 1em; // Base styles for mobile
+  max-width: 1200px;
+  margin: auto;
+
+  h2 {
+    font-size: 2em;
+    font-weight: 700;
+    font-style: italic;
+    margin-bottom: 0.7em;
+    text-align: center; // Base style for mobile
+  }
+
+  @include bp-l {
+    // Adjustments for larger screens
+    padding: 2em;
+
+    h2 {
+      text-align: left;
+    }
+  }
+}
+
+// Overview component
+.indexOverview {
+  padding: 2em;
+  background: linear-gradient(
+    270deg,
+    rgba(17, 20, 41, 0.5) 0%,
+    rgba(19, 26, 55, 0.5) 100%
+  );
+  box-shadow: inset 0px 1px 1px rgba(127, 143, 255, 0.25);
+  border-radius: 32px;
+  display: grid;
+  grid-template-columns: 1fr;
+
+  @include bp-xl {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+// OverviewImgWrapper component
+.indexOverviewImgWrapper {
+  position: relative;
+  border-radius: 33px;
+  padding: 2px;
+  background: linear-gradient(
+    15deg,
+    rgba(46, 81, 245, 0.5) 0%,
+    rgba(64, 224, 255, 0.5) 23%,
+    rgba(240, 20, 178, 0.5) 49%,
+    rgba(253, 223, 6, 0.5) 77%,
+    rgba(245, 138, 37, 0.5) 100%
+  );
+  height: 100%; // Specific style for mobile
+  min-height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// OverviewImg component
+.indexOverviewImg {
+  border-radius: 32px;
+  background: #0c0e1c;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-image: url('../../../public/soluno_logo.png');
+  background-position: center;
+  background-size: 750px 545px; // Adjusted for mobile first
+  background-repeat: no-repeat;
+
+  &:before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: -200%;
+    right: 0;
+    height: 100%;
+    width: 500%;
+    background-image: url('https://only1token.com/assets/img/portfolio23d.png');
+    background-position: center;
+    background-size: 750px 545px; // Adjusted for mobile first
+    background-repeat: no-repeat;
+    filter: blur(0.7em);
+    z-index: -5;
+  }
+
+  @include bp-l {
+    // Modification for screens larger than 768px
+    background-size: 1000px 727px;
+
+    &:before {
+      background-size: 1000px 727px;
+    }
+  }
+}
+
+.indexOverviewItemWrapper {
+  width: 100%;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+
+  @include bp-l {
+    padding-left: 2em;
+  }
+}
+
+// OverviewItem component
+.indexOverviewItem {
+  width: 100%;
+  margin: 2em 0;
+
+  h2 {
+    margin-bottom: 1em;
+  }
+}
+
+.indexOverviewItemLinks {
+  display: flex;
+  justify-content: center;
+
+  @include bp-xl {
+    justify-content: start;
+  }
+}
+
+// Powered component
+.indexPowered {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 2em 0; // Adjusted for mobile
+  max-width: 1200px;
+  margin: 0 auto 2em auto; // Adjusted for mobile
+  h1 {
+    font-size: 2em;
+    font-weight: 700;
+    font-style: italic;
+    margin-bottom: 0.7em;
+    text-align: center; // Centered for mobile
+  }
+
+  &:before {
+    position: absolute;
+    content: '';
+    top: -400px;
+    left: 800px; // This will likely need to be adjusted or disabled on mobile due to the `left: 800px;` which could cause overflow issues.
+    right: 0;
+    width: 440px;
+    height: 440px;
+    border-radius: 15rem;
+    background: linear-gradient(
+        197.37deg,
+        #7450db -0.38%,
+        rgba(138, 234, 240, 0) 101.89%
+      ),
+      linear-gradient(
+        115.93deg,
+        #3e88f6 4.86%,
+        rgba(62, 180, 246, 0.33) 38.05%,
+        rgba(62, 235, 246, 0) 74.14%
+      ),
+      radial-gradient(
+        56.47% 76.87% at 6.92% 7.55%,
+        rgba(62, 136, 246, 0.7) 0%,
+        rgba(62, 158, 246, 0.182) 52.16%,
+        rgba(62, 246, 246, 0) 100%
+      ),
+      linear-gradient(306.53deg, #2ee4e3 19.83%, rgba(46, 228, 227, 0) 97.33%);
+    background-blend-mode: normal, normal, normal, normal, normal, normal;
+    filter: blur(200px);
+    opacity: 0.5;
+  }
+
+  @include bp-l {
+    // Modifications for screens larger than 768px
+    padding: 2em;
+    margin: 0 auto 4em auto;
+
+    h1 {
+      text-align: left;
+    }
+  }
+}
+
+// PoweredItemWrapper component
+.indexPoweredItemWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column; // Base style for mobile
+  margin: auto;
+
+  @include bp-l {
+    // Adjustments for larger screens
+    flex-direction: row;
+  }
+}
+
+// PoweredItem component
+.indexPoweredItem {
+  width: 100%; // Full width for mobile
+  padding: 0em; // Adjusted for mobile
+  margin: auto;
+  text-align: center;
+
+  p {
+    padding: 2em; // Adjusted for mobile
+    color: #fff;
+  }
+
+  @include bp-l {
+    // Adjustments for larger screens
+    width: 50%;
+    padding: 2em;
+
+    p {
+      padding: 1em;
+    }
+  }
+}
+
+// PoweredItemImg component (Note: No changes needed for mobile-first as it does not contain media query adjustments)
+.indexPoweredItemImg {
+  width: 100%;
+  height: 300px;
+  margin: auto;
+  position: relative;
+  background-image: url('https://only1token.com/assets/img/poweredby.png');
+  background-position: center;
+  background-size: auto 300px;
+  background-repeat: no-repeat;
+}
+
+// PoweredItemImg2 component (Identical approach as PoweredItemImg, thus also no changes for mobile-first)
+.indexPoweredItemImg2 {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  background-image: url('https://only1token.com/assets/img/liquidity.png');
+  background-position: center;
+  background-size: auto 300px;
+  background-repeat: no-repeat;
+}

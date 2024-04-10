@@ -1,0 +1,3 @@
+interface ITokenMarketCap {
+  tokenAddress: string;
+}
