@@ -23,7 +23,7 @@ const TokenHolders = async ({ tokenAddress }: ITokenHolders) => {
 
     const programId = acc?.owner.toBase58();
 
-    const res = await tatum.rpc.getProgramAccounts(programId as string, {
+    const accounts = await tatum.rpc.getProgramAccounts(programId as string, {
       encoding: Encoding.JsonParsed,
       commitment: Commitment.Confirmed,
       filters: [
@@ -39,10 +39,18 @@ const TokenHolders = async ({ tokenAddress }: ITokenHolders) => {
       ],
     });
 
-    const activeHolders = res.result?.filter(
+    console.log('accounts', accounts);
+
+    const activeHolders = accounts.result?.filter(
       // @ts-ignore - data doesn't have parsed as a type
       (wallet) => wallet.account.data?.parsed?.info.tokenAmount.uiAmount > 0,
     );
+
+    console.log('activeHolders', activeHolders);
+
+    if (activeHolders?.length === 0) {
+      throw new Error('No holders found');
+    }
 
     console.log('activeHolders', activeHolders?.length);
 
@@ -78,7 +86,6 @@ const TokenHolders = async ({ tokenAddress }: ITokenHolders) => {
 
     console.log('NUMBER OF HOLDERS', parseFloat(result));
 
-    console.log('holderssss', result);
     holdersText = result;
     await browser.close();
   }
