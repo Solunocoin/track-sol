@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "concurrently \"NODE_OPTIONS='--inspect' next dev\" \"npx typed-scss-modules src -w\"",
+    "devAlex": "concurrently \"next dev\" \"npx typed-scss-modules src -w\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
