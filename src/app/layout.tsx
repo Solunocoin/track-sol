@@ -1,5 +1,5 @@
 import Navbar from '@/components/Navbar/Navbar';
-import { GoogleAnalytics } from '@next/third-parties/google';
+import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 import { Barlow } from 'next/font/google';
 import Script from 'next/script';
@@ -31,6 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head></head>
+      <GoogleTagManager gtmId="GTM-W2H722V6" />
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=G-FQDVKXKWVB`}
         strategy="afterInteractive"
@@ -44,7 +45,7 @@ export default function RootLayout({
               gtag('config', 'G-FQDVKXKWVB');
         `}
       </Script>
-      <GoogleAnalytics gaId="G-FQDVKXKWVB" />
+      <GoogleAnalytics gaId="" />
       <body className={barlow.className}>
         <SkeletonTheme baseColor="#19214250" highlightColor="#1e284f50">
           <Navbar />
