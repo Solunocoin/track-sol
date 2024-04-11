@@ -2,6 +2,7 @@ import Navbar from '@/components/Navbar/Navbar';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 import { Barlow } from 'next/font/google';
+import Script from 'next/script';
 import { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import './globals.scss';
@@ -29,13 +30,27 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head></head>
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=G-FQDVKXKWVB`}
+        strategy="afterInteractive"
+      />
+
+      <Script id="google-analytics-script" strategy="afterInteractive">
+        {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-FQDVKXKWVB');
+        `}
+      </Script>
+      <GoogleAnalytics gaId="G-FQDVKXKWVB" />
       <body className={barlow.className}>
         <SkeletonTheme baseColor="#19214250" highlightColor="#1e284f50">
           <Navbar />
           {children}
         </SkeletonTheme>
       </body>
-      <GoogleAnalytics gaId="G-FQDVKXKWVB" />
     </html>
   );
 }
