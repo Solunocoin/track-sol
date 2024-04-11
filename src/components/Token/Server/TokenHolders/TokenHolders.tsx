@@ -1,3 +1,5 @@
+import getTokenHolders from '@/utils/getTokenHolders';
+import isNumeric from '@/utils/isNumeric';
 import { PublicKey } from '@solana/web3.js';
 import {
   Commitment,
@@ -14,80 +16,93 @@ const TokenHolders = async ({ tokenAddress }: ITokenHolders) => {
 
   try {
     const connection = await createConnectionWithRetry();
+
     const tatum = await TatumSDK.init<Solana>({
       network: Network.SOLANA,
       apiKey: 't-661849d1acc02b001cc17141-890aa37e5291467ab8632a83',
     });
 
-    const acc = await connection.getAccountInfo(new PublicKey(tokenAddress));
+    const accountInfo = await connection.getAccountInfo(
+      new PublicKey(tokenAddress),
+    );
 
-    const programId = acc?.owner.toBase58();
+    const programId = accountInfo?.owner.toBase58();
 
-    const accounts = await tatum.rpc.getProgramAccounts(programId as string, {
-      encoding: Encoding.JsonParsed,
-      commitment: Commitment.Confirmed,
-      filters: [
-        {
-          dataSize: 165,
-        },
-        {
-          memcmp: {
-            offset: 0,
-            bytes: tokenAddress,
+    const allHolders = await Promise.race([
+      tatum.rpc.getProgramAccounts(programId as string, {
+        encoding: Encoding.JsonParsed,
+        commitment: Commitment.Confirmed,
+        filters: [
+          {
+            dataSize: 165,
           },
-        },
-      ],
-    });
+          {
+            memcmp: {
+              offset: 0,
+              bytes: tokenAddress,
+            },
+          },
+        ],
+      }),
+      new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('Request timed out')), 3000),
+      ),
+    ]);
 
-    console.log('accounts', accounts);
-
-    const activeHolders = accounts.result?.filter(
+    // @ts-ignore - data doesn't have parsed as a type
+    const activeHolders = allHolders?.result?.filter(
       // @ts-ignore - data doesn't have parsed as a type
       (wallet) => wallet.account.data?.parsed?.info.tokenAmount.uiAmount > 0,
     );
-
-    console.log('activeHolders', activeHolders);
 
     if (activeHolders?.length === 0) {
       throw new Error('No holders found');
     }
 
-    console.log('activeHolders', activeHolders?.length);
-
     holdersText = activeHolders?.length?.toString() || `Unavailable`;
 
     // const holders = await getTokenHolders(tokenAddress);
   } catch (error) {
-    const url = `https://solscan.io/token/${tokenAddress}`;
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    await page.goto(url, { waitUntil: 'networkidle0' });
+    try {
+      const url = `https://solscan.io/token/${tokenAddress}`;
+      const browser = await puppeteer.launch();
+      const page = await browser.newPage();
+      await page.goto(url, { waitUntil: 'networkidle0' });
 
-    await page.waitForSelector('#__next', {
-      visible: true,
-    });
+      await page.waitForSelector('#__next', {
+        visible: true,
+      });
 
-    // Extract some data or perform actions
-    const result = await page.evaluate(() => {
-      const firstChildDiv = document.querySelector(
-        '#__next > div',
-      ) as HTMLElement;
+      // Extract some data or perform actions
+      const result = await page.evaluate(() => {
+        const firstChildDiv = document.querySelector(
+          '#__next > div',
+        ) as HTMLElement;
 
-      const text = firstChildDiv?.innerText;
+        const text = firstChildDiv?.innerText;
 
-      const lines = text.split('\n'); // Splitting text into lines
-      let holdersLineIndex = lines.findIndex((line) =>
-        line.includes('Holders'),
-      ); // Find index of the line containing 'Holders'
-      return holdersLineIndex !== -1
-        ? lines[holdersLineIndex + 1].trim()
-        : 'Holders data not found'; // Return the next line if found
-    });
+        const lines = text.split('\n'); // Splitting text into lines
+        let holdersLineIndex = lines.findIndex((line) =>
+          line.includes('Holders'),
+        ); // Find index of the line containing 'Holders'
+        return holdersLineIndex !== -1
+          ? lines[holdersLineIndex + 1].trim()
+          : 'Holders data not found'; // Return the next line if found
+      });
 
-    console.log('NUMBER OF HOLDERS', parseFloat(result));
-
-    holdersText = result;
-    await browser.close();
+      if (isNumeric(result)) {
+        holdersText = result;
+      } else {
+        throw new Error('Holders data not found');
+      }
+    } catch (error) {
+      try {
+        const holders = await getTokenHolders(tokenAddress);
+        holdersText = holders.length.toString();
+      } catch (error) {
+        holdersText = 'Unavailable';
+      }
+    }
   }
 
   return <h4>{holdersText}</h4>;
