@@ -1,5 +1,5 @@
 import formatNumber from '@/utils/formatNumber';
-import getTokensBestPair from '@/utils/getDexScreenerTokenData';
+import getTokensBestPair from '@/utils/getTokensBestPair';
 
 const TokenPrice = async ({ tokenAddress }: ITokenHolders) => {
   const bestPairRes = await getTokensBestPair(tokenAddress);

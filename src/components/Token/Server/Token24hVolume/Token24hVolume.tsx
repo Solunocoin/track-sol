@@ -1,5 +1,5 @@
 import formatNumber from '@/utils/formatNumber';
-import getTokensBestPair from '@/utils/getDexScreenerTokenData';
+import getTokensBestPair from '@/utils/getTokensBestPair';
 import styles from './Token24hVolume.module.scss';
 
 const Token24hVolume = async ({ tokenAddress }: ITokenHolders) => {

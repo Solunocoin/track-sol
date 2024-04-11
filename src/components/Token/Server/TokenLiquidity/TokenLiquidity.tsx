@@ -1,5 +1,5 @@
 import formatNumber from '@/utils/formatNumber';
-import getTokensBestPair from '@/utils/getDexScreenerTokenData';
+import getTokensBestPair from '@/utils/getTokensBestPair';
 import styles from './TokenLiquidity.module.scss';
 
 const TokenLiquidity = async ({ tokenAddress }: ITokenHolders) => {

@@ -1,4 +1,5 @@
 import Navbar from '@/components/Navbar/Navbar';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 import { Barlow } from 'next/font/google';
 import { SkeletonTheme } from 'react-loading-skeleton';
@@ -33,6 +34,7 @@ export default function RootLayout({
           <Navbar />
           {children}
         </SkeletonTheme>
+        <GoogleAnalytics gaId="G-FQDVKXKWVB" />
       </body>
     </html>
   );

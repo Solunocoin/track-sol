@@ -27,19 +27,25 @@ const getTokenHolders = async (tokenAddress: string) => {
           params: {
             page: page,
             limit: 1000,
-            displayOptions: {},
+            displayOptions: {
+              showZeroBalance: false,
+            },
             mint: tokenAddress,
           },
         }),
       });
       const data = await response.json();
 
+      console.log('data.error', data.error);
       // Check for rate limit or other errors in response
-      if (data.error && data.error.code === -32429) {
-        // Assuming 429 is the rate limit error code
+      if (
+        data.error &&
+        (data.error.code === -32429 || data.error.code === -32504)
+      ) {
         console.log(
           `Rate limit hit on ${urls[currentUrlIndex]}, switching endpoint...`,
         );
+
         currentUrlIndex = (currentUrlIndex + 1) % urls.length; // Switch to the next URL
 
         if (currentUrlIndex === 0) {

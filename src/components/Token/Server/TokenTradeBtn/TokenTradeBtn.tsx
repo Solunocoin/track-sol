@@ -1,4 +1,4 @@
-import getTokensBestPair from '@/utils/getDexScreenerTokenData';
+import getTokensBestPair from '@/utils/getTokensBestPair';
 import styles from './TokenTradeBtn.module.scss';
 
 const TokenTradeBtn = async ({ tokenAddress }: ITokenHolders) => {

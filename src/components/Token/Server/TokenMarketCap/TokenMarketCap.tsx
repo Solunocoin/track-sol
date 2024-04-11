@@ -1,5 +1,5 @@
 import formatNumber from '@/utils/formatNumber';
-import getTokensBestPair from '@/utils/getDexScreenerTokenData';
+import getTokensBestPair from '@/utils/getTokensBestPair';
 import { PublicKey } from '@solana/web3.js';
 import { createConnectionWithRetry } from '../../../../../lib/solana';
 

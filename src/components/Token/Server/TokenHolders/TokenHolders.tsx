@@ -1,9 +1,12 @@
-import getTokenHolders from '@/utils/getTokenHolders';
-
 const TokenHolders = async ({ tokenAddress }: ITokenHolders) => {
-  const holders = await getTokenHolders(tokenAddress);
+  // const holders = await getTokenHolders(tokenAddress);
 
-  return <h4>{holders.length}</h4>;
+  return (
+    <h4>
+      Unavailable
+      {/* {holders.length} */}
+    </h4>
+  );
 };
 
 export default TokenHolders;
