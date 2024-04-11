@@ -34,8 +34,8 @@ export default function RootLayout({
           <Navbar />
           {children}
         </SkeletonTheme>
-        <GoogleAnalytics gaId="G-FQDVKXKWVB" />
       </body>
+      <GoogleAnalytics gaId="G-FQDVKXKWVB" />
     </html>
   );
 }
