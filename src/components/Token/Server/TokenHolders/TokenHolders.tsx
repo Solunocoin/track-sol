@@ -40,6 +40,7 @@ const TokenHolders = async ({ tokenAddress }: ITokenHolders) => {
     });
 
     const activeHolders = res.result?.filter(
+      // @ts-ignore - data doesn't have parsed as a type
       (wallet) => wallet.account.data?.parsed?.info.tokenAmount.uiAmount > 0,
     );
 
@@ -60,7 +61,9 @@ const TokenHolders = async ({ tokenAddress }: ITokenHolders) => {
 
     // Extract some data or perform actions
     const result = await page.evaluate(() => {
-      const firstChildDiv = document.querySelector('#__next > div');
+      const firstChildDiv = document.querySelector(
+        '#__next > div',
+      ) as HTMLElement;
 
       const text = firstChildDiv?.innerText;
 
