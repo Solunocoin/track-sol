@@ -3,7 +3,6 @@ import Link from 'next/link';
 import browserLogo from '../../../public/browser_logo.png';
 import logo from '../../../public/logo.png';
 import telegramLogo from '../../../public/telegram_logo.png';
-import xLogo from '../../../public/x_logo.png';
 import LogoLink from '../LogoLink/LogoLink';
 import NavbarSearch from '../NavbarSearch/NavbarSearch';
 import styles from './Navbar.module.scss';
@@ -41,11 +40,11 @@ const Navbar = () => {
             logo={telegramLogo}
             alt="Telegram logo"
           />
-          <LogoLink
+          {/* <LogoLink
             href="https://twitter.com/solunocoin"
             logo={xLogo}
             alt="X (twitter) logo"
-          />
+          /> */}
 
           <LogoLink
             logo={browserLogo}
