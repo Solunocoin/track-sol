@@ -55,7 +55,6 @@ const TokenWalletDetails = ({ tokenAddress }: ITokenWalletDetails) => {
             }}
           >
             Please make sure {`you're`} inputting a Solana wallet address.
-            <address></address>
           </div>
         </div>
       ) : (

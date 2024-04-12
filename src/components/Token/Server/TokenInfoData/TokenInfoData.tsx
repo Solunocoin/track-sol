@@ -7,7 +7,7 @@ import { QuestionCircle } from 'react-bootstrap-icons';
 import { solana } from '../../../../../lib/solana';
 import styles from './TokenInfoData.module.scss';
 
-const TokenDataInfo = async ({ tokenAddress }: ITokenInfo) => {
+const TokenDataInfo = async ({ tokenAddress, reverse }: ITokenInfo) => {
   const metaplex = Metaplex.make(solana);
 
   const mintAddress = new PublicKey(tokenAddress);
@@ -72,7 +72,11 @@ const TokenDataInfo = async ({ tokenAddress }: ITokenInfo) => {
   }
 
   return (
-    <div className={styles.tokenInfoData}>
+    <div
+      className={`${styles.tokenInfoData} ${
+        reverse ? styles.tokenInfoDataReverse : ''
+      }`}
+    >
       <div className={styles.tokenInfoDataName}>
         <h4>{truncateString(tokenName, 15)}</h4>
         <h5>{tokenSymbol}</h5>

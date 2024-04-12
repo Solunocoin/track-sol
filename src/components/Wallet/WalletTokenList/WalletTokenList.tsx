@@ -1,6 +1,8 @@
+import TokenInfo from '@/components/Token/Client/TokenInfo/TokenInfo';
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import { PublicKey } from '@solana/web3.js';
 import { solana } from '../../../../lib/solana';
+import WalletTokenPrice from '../WalletTokenPrice/WalletTokenPrice';
 import styles from './WalletTokenList.module.scss';
 
 const WalletTokenList = async ({ walletAddress }: IWalletTokenList) => {
@@ -15,19 +17,21 @@ const WalletTokenList = async ({ walletAddress }: IWalletTokenList) => {
     (token) => token.account.data.parsed.info.tokenAmount.uiAmount > 0,
   );
 
+  console.log('tokensData', tokensData[0].account.data);
+
   const tokenAddresses = tokensData.map(
     (token) => token.account.data.parsed.info.mint,
   );
 
-  console.log('tokens', tokenAddresses);
+  // console.log('tokens', tokenAddresses);
 
-  console.log('tokenAccounts', tokenAccounts.value[5].account.data.parsed.info);
+  // console.log('tokenAccounts', tokenAccounts.value[5].account.data.parsed.info);
 
-  const response = await fetch(
-    `https://api.dexscreener.com/latest/dex/tokens/${tokenAddresses.join(',')}`,
-  );
+  // const response = await fetch(
+  //   `https://api.dexscreener.com/latest/dex/tokens/${tokenAddresses.join(',')}`,
+  // );
 
-  const data: TokenDetailsResponseType = await response.json();
+  // const data: TokenDetailsResponseType = await response.json();
 
   // const groupedByBaseTokenAddress = data?.pairs?.reduce(
   //   (accumulator, currentValue) => {
@@ -97,51 +101,29 @@ const WalletTokenList = async ({ walletAddress }: IWalletTokenList) => {
           flexDirection: 'column',
         }}
       >
+        <div className={styles.walletListHeader}>
+          <div>Token</div>
+          <div>Price</div>
+          <div>Amount</div>
+          <div>Info</div>
+        </div>
+        <hr />
         {tokensData.map((token, index) => (
-          <>
-            <h4>{token.account.data.parsed.info.mint}</h4>
-            <div>{token.account.data.parsed.info.tokenAmount.uiAmount}</div>
-          </>
-        ))}
-        {/* <div>
-          <h3>Balance</h3>
-          <div className={styles.tokenMoreDetailsItemInner}>
-            <h4>
-              {balance > 1
-                ? formatNumber(Number(balance), 3)
-                : balance < 1
-                ? formatNumber(Number(balance), 8)
-                : '-'}
-            </h4>
-          </div>
-        </div>
-        <div
-          style={{
-            textAlign: 'center',
-          }}
-        >
-          <h3>Share</h3>
+          <div key={index} className={styles.walletListItem}>
+            <TokenInfo
+              reverse={true}
+              tokenAddress={token.account.data.parsed.info.mint}
+            />
 
-          <div className={styles.tokenMoreDetailsItemInner}>
-            <h4>
-              {percentage > 1
-                ? `${formatNumber(Number(percentage), 4)}%`
-                : percentage < 0.000001 && percentage > 0
-                ? '<0.000001%'
-                : `${formatNumber(Number(percentage), 6)}%`}
-            </h4>
+            <WalletTokenPrice
+              tokenAddress={token.account.data.parsed.info.mint}
+            />
+            <WalletTokenPrice
+              tokenAddress={token.account.data.parsed.info.mint}
+            />
+            <div>Trade</div>
           </div>
-        </div>
-        <div
-          style={{
-            textAlign: 'right',
-          }}
-        >
-          <h3>Value</h3>
-          <div className={styles.tokenMoreDetailsItemInner}>
-            <h4>${formatNumber(Number(value), 3)}</h4>
-          </div>
-        </div> */}
+        ))}
       </div>
     </div>
   );

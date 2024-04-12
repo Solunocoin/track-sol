@@ -38,3 +38,28 @@
 .tokenMoreDetailsItemInner {
   height: 18px;
 }
+
+.walletListItem {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 0.5fr;
+  width: 100%;
+  border-radius: 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid #222742;
+
+  h3 {
+    color: #bcc2ed;
+    margin: 0;
+    vertical-align: middle;
+    line-height: 1em;
+    padding: 0;
+    font-size: 1em;
+  }
+}
+
+.walletListHeader {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 0.5fr;
+  padding: 0.75rem 1rem;
+  padding-bottom: 0;
+}
