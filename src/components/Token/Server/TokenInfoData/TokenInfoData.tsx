@@ -3,14 +3,12 @@ import truncateString from '@/utils/truncateString';
 import { Metaplex } from '@metaplex-foundation/js';
 import { ENV, TokenListProvider } from '@solana/spl-token-registry';
 import { PublicKey } from '@solana/web3.js';
-import { createConnectionWithRetry } from '../../../../../lib/solana';
-import logo from '../../../../../public/logo.png';
+import { QuestionCircle } from 'react-bootstrap-icons';
+import { solana } from '../../../../../lib/solana';
 import styles from './TokenInfoData.module.scss';
 
 const TokenDataInfo = async ({ tokenAddress }: ITokenInfo) => {
-  const connection = await createConnectionWithRetry();
-
-  const metaplex = Metaplex.make(connection);
+  const metaplex = Metaplex.make(solana);
 
   const mintAddress = new PublicKey(tokenAddress);
 
@@ -23,7 +21,7 @@ const TokenDataInfo = async ({ tokenAddress }: ITokenInfo) => {
     .pdas()
     .metadata({ mint: mintAddress });
 
-  const metadataAccountInfo = await connection.getAccountInfo(metadataAccount);
+  const metadataAccountInfo = await solana.getAccountInfo(metadataAccount);
 
   if (metadataAccountInfo) {
     const token = await metaplex
@@ -69,7 +67,7 @@ const TokenDataInfo = async ({ tokenAddress }: ITokenInfo) => {
 
       tokenName = bestPair.data?.baseToken.name;
       tokenSymbol = bestPair.data?.baseToken.symbol;
-      tokenLogo = bestPair.data?.info.imageUrl;
+      tokenLogo = bestPair.data?.info?.imageUrl;
     }
   }
 
@@ -80,11 +78,19 @@ const TokenDataInfo = async ({ tokenAddress }: ITokenInfo) => {
         <h5>{tokenSymbol}</h5>
       </div>
 
-      <img
-        className={styles.tokenInfoDataLogo}
-        src={tokenLogo ? tokenLogo : logo}
-        alt={`${tokenName} logo`}
-      />
+      {tokenLogo ? (
+        <img
+          className={styles.tokenInfoDataLogo}
+          src={tokenLogo}
+          alt={`${tokenName} logo`}
+        />
+      ) : (
+        <QuestionCircle
+          className={styles.tokenInfoDataLogo}
+          width={40}
+          height={40}
+        />
+      )}
     </div>
   );
 };

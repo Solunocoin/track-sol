@@ -1,14 +1,23 @@
+import formatNumber from '@/utils/formatNumber';
+import { PublicKey } from '@metaplex-foundation/js';
 import { Suspense } from 'react';
 import Skeleton from 'react-loading-skeleton';
+import { solana } from '../../../../../lib/solana';
 import InfoTip from '../../../InfoTip/InfoTip';
 import TokenMarketCap from '../../Server/TokenMarketCap/TokenMarketCap';
 import TokenPrice from '../../Server/TokenPrice/TokenPrice';
-import TokenSupply from '../../Server/TokenSupply/TokenSupply';
 import TokenTradeBtn from '../../Server/TokenTradeBtn/TokenTradeBtn';
 import TokenDetailsContainer from '../TokenDetailsContainer/TokenDetailsContainer';
 import styles from './TokenDetails.module.scss';
 
 const TokenDetails = async ({ tokenAddress }: ITokenDetails) => {
+  const supply = await solana.getTokenSupply(new PublicKey(tokenAddress));
+  const totalSupply = supply.value.uiAmount;
+
+  if (!totalSupply) {
+    return null;
+  }
+
   return (
     <TokenDetailsContainer>
       <div>
@@ -29,7 +38,10 @@ const TokenDetails = async ({ tokenAddress }: ITokenDetails) => {
         </h3>
         <div className={styles.tokenDetailsItemInner}>
           <Suspense fallback={<Skeleton height="100%" width="80%" />}>
-            <TokenMarketCap tokenAddress={tokenAddress} />
+            <TokenMarketCap
+              tokenAddress={tokenAddress}
+              totalSupply={totalSupply}
+            />
           </Suspense>
         </div>
       </div>
@@ -43,9 +55,7 @@ const TokenDetails = async ({ tokenAddress }: ITokenDetails) => {
         </h3>
 
         <div className={styles.tokenDetailsItemInner}>
-          <Suspense fallback={<Skeleton height="100%" width="80%" />}>
-            <TokenSupply tokenAddress={tokenAddress} />
-          </Suspense>
+          <h4>{formatNumber(Number(totalSupply), 3)}</h4>
         </div>
       </div>
 

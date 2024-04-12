@@ -1,12 +1,10 @@
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import { PublicKey } from '@solana/web3.js';
-import { createConnectionWithRetry } from '../../../../lib/solana';
+import { solana } from '../../../../lib/solana';
 import styles from './WalletTokenList.module.scss';
 
 const WalletTokenList = async ({ walletAddress }: IWalletTokenList) => {
-  const connection = await createConnectionWithRetry();
-
-  const tokenAccounts = await connection.getParsedTokenAccountsByOwner(
+  const tokenAccounts = await solana.getParsedTokenAccountsByOwner(
     new PublicKey(walletAddress),
     {
       programId: TOKEN_PROGRAM_ID,

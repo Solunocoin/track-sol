@@ -1,3 +1,5 @@
+'use client';
+
 import Card from '@/components/Card/Card';
 import Main from '@/components/Main/Main';
 import Skeleton from 'react-loading-skeleton';

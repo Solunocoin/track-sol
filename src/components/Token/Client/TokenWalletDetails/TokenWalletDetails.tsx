@@ -6,7 +6,7 @@ import { PublicKey } from '@solana/web3.js';
 import { useQueryState } from 'nuqs';
 import { Suspense, useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import { createConnectionWithRetry } from '../../../../../lib/solana';
+import { solana } from '../../../../../lib/solana';
 import TokenWalletData from '../../Server/TokenWalletData/TokenWalletData';
 
 const TokenWalletDetails = ({ tokenAddress }: ITokenWalletDetails) => {
@@ -15,10 +15,8 @@ const TokenWalletDetails = ({ tokenAddress }: ITokenWalletDetails) => {
 
   useEffect(() => {
     const fetch = async () => {
-      const connection = await createConnectionWithRetry();
-
       try {
-        const accountInfo = await connection.getAccountInfo(
+        const accountInfo = await solana.getAccountInfo(
           new PublicKey(walletParam as string),
         );
 

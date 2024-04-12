@@ -1,17 +1,12 @@
 import formatNumber from '@/utils/formatNumber';
 import getTokensBestPair from '@/utils/getTokensBestPair';
-import { PublicKey } from '@solana/web3.js';
-import { createConnectionWithRetry } from '../../../../../lib/solana';
 
-const TokenMarketCap = async ({ tokenAddress }: ITokenMarketCap) => {
-  const connection = await createConnectionWithRetry();
-
-  const supply = await connection.getTokenSupply(new PublicKey(tokenAddress));
-
+const TokenMarketCap = async ({
+  tokenAddress,
+  totalSupply,
+}: ITokenMarketCap) => {
   const bestPairRes = await getTokensBestPair(tokenAddress);
   const bestPair = bestPairRes?.data;
-
-  const totalSupply = supply.value.uiAmount;
 
   let content;
 

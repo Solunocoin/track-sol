@@ -1,37 +1,19 @@
 import getTokenHolders from '@/utils/getTokenHolders';
 import isNumeric from '@/utils/isNumeric';
-import { PublicKey } from '@solana/web3.js';
-import {
-  Commitment,
-  Encoding,
-  Network,
-  Solana,
-  TatumSDK,
-} from '@tatumio/tatum';
+import { AccountInfo, ParsedAccountData, PublicKey } from '@solana/web3.js';
 import puppeteer from 'puppeteer';
-import { createConnectionWithRetry } from '../../../../../lib/solana';
-
+import { solana } from '../../../../../lib/solana';
 const TokenHolders = async ({ tokenAddress }: ITokenHolders) => {
   let holdersText = `Unavailable`;
 
   try {
-    const connection = await createConnectionWithRetry();
-
-    const tatum = await TatumSDK.init<Solana>({
-      network: Network.SOLANA,
-      apiKey: 't-661849d1acc02b001cc17141-890aa37e5291467ab8632a83',
-    });
-
-    const accountInfo = await connection.getAccountInfo(
+    const accountInfo = await solana.getAccountInfo(
       new PublicKey(tokenAddress),
     );
 
-    const programId = accountInfo?.owner.toBase58();
-
-    const allHolders = await Promise.race([
-      tatum.rpc.getProgramAccounts(programId as string, {
-        encoding: Encoding.JsonParsed,
-        commitment: Commitment.Confirmed,
+    const allHolders = (await Promise.race([
+      await solana.getParsedProgramAccounts(accountInfo?.owner as PublicKey, {
+        commitment: 'confirmed',
         filters: [
           {
             dataSize: 165,
@@ -45,12 +27,18 @@ const TokenHolders = async ({ tokenAddress }: ITokenHolders) => {
         ],
       }),
       new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Request timed out')), 3000),
+        setTimeout(() => {
+          reject(new Error('Request timed out'));
+          return [];
+        }, 3000),
       ),
-    ]);
+    ])) as {
+      pubkey: PublicKey;
+      account: AccountInfo<Buffer | ParsedAccountData>;
+    }[];
 
     // @ts-ignore - data doesn't have parsed as a type
-    const activeHolders = allHolders?.result?.filter(
+    const activeHolders = allHolders?.filter(
       // @ts-ignore - data doesn't have parsed as a type
       (wallet) => wallet.account.data?.parsed?.info.tokenAmount.uiAmount > 0,
     );
@@ -63,6 +51,7 @@ const TokenHolders = async ({ tokenAddress }: ITokenHolders) => {
 
     // const holders = await getTokenHolders(tokenAddress);
   } catch (error) {
+    console.log('ERROR', error);
     try {
       const url = `https://solscan.io/token/${tokenAddress}`;
       const browser = await puppeteer.launch();
