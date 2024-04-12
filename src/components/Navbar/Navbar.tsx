@@ -52,6 +52,9 @@ const Navbar = () => {
             alt="Website Logo"
             href="https://www.soluno.io/"
           />
+          <Link href={`/token/6xEJQMQTgrvuZTS2mGELGmc4RqTXL4W8nDH4uxgFMs58`}>
+            token
+          </Link>
         </div>
       </div>
     </div>

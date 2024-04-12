@@ -56,10 +56,8 @@ const NavbarSearch = () => {
       <div className={styles.navbarSearchButtonWrapper}>
         <Button
           onClick={() => {
-            if (token) {
-              router.push(`/token/${token}`);
-              setToken('');
-            }
+            router.push(`/token/${token}`);
+            setToken('');
           }}
           disabled={!token}
           style={{

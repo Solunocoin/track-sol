@@ -11,6 +11,9 @@ const getTokensBestPair = async (
   try {
     const response = await fetch(
       `https://api.dexscreener.com/latest/dex/tokens/${tokenAddress}`,
+      {
+        cache: 'no-cache',
+      },
     );
 
     const data: TokenDetailsResponseType = await response.json();
