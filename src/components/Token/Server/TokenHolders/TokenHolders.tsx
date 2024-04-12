@@ -56,7 +56,16 @@ const TokenHolders = async ({ tokenAddress }: ITokenHolders) => {
       const url = `https://solscan.io/token/${tokenAddress}`;
       const browser = await puppeteer.launch();
       const page = await browser.newPage();
-      await page.goto(url, { waitUntil: 'networkidle0' });
+
+      if (!page) {
+        throw new Error('Page not found');
+      }
+
+      const pageVerify = await page.goto(url, { waitUntil: 'networkidle0' });
+
+      if (!pageVerify) {
+        throw new Error('Page not found');
+      }
 
       await page.waitForSelector('#__next', {
         visible: true,
