@@ -42,9 +42,7 @@ const getTokenHolders = async (tokenAddress: string) => {
         data.error &&
         (data.error.code === -32429 || data.error.code === -32504)
       ) {
-        console.log(
-          `Rate limit hit on ${urls[currentUrlIndex]}, switching endpoint...`,
-        );
+        console.log(`Rate limit hit`);
 
         currentUrlIndex = (currentUrlIndex + 1) % urls.length; // Switch to the next URL
 

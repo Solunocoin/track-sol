@@ -2,16 +2,14 @@ import formatNumber from '@/utils/formatNumber';
 import getTokensBestPair from '@/utils/getTokensBestPair';
 import { AccountLayout, TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import { PublicKey } from '@solana/web3.js';
-import { createConnectionWithRetry } from '../../../../../lib/solana';
+import { solana } from '../../../../../lib/solana';
 import styles from './TokenWalletDetails.module.scss';
 
 const TokenWalletData = async ({
   tokenAddress,
   walletAddress,
 }: ITokenWalletData) => {
-  const connection = await createConnectionWithRetry();
-
-  const tokenAccounts = await connection.getTokenAccountsByOwner(
+  const tokenAccounts = await solana.getTokenAccountsByOwner(
     new PublicKey(walletAddress),
     {
       mint: new PublicKey(tokenAddress),
@@ -19,7 +17,7 @@ const TokenWalletData = async ({
     },
   );
 
-  const supply = await connection.getTokenSupply(new PublicKey(tokenAddress));
+  const supply = await solana.getTokenSupply(new PublicKey(tokenAddress));
 
   const bestPairRes = await getTokensBestPair(tokenAddress);
   const bestPair = bestPairRes?.data;
@@ -81,7 +79,13 @@ const TokenWalletData = async ({
         >
           <h3>Value</h3>
           <div className={styles.tokenMoreDetailsItemInner}>
-            <h4>${formatNumber(Number(value), 3)}</h4>
+            <h4>
+              {value === 0
+                ? '$0'
+                : value < 0.0001
+                ? '<$0.0001'
+                : `$${formatNumber(Number(value), 3)}`}
+            </h4>
           </div>
         </div>
       </div>
