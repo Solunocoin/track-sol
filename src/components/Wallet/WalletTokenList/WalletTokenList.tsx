@@ -1,4 +1,3 @@
-import TokenInfo from '@/components/Token/Client/TokenInfo/TokenInfo';
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import { PublicKey } from '@solana/web3.js';
 import { solana } from '../../../../lib/solana';
@@ -110,10 +109,10 @@ const WalletTokenList = async ({ walletAddress }: IWalletTokenList) => {
         <hr />
         {tokensData.map((token, index) => (
           <div key={index} className={styles.walletListItem}>
-            <TokenInfo
+            {/* <TokenInfo
               reverse={true}
               tokenAddress={token.account.data.parsed.info.mint}
-            />
+            /> */}
 
             <WalletTokenPrice
               tokenAddress={token.account.data.parsed.info.mint}

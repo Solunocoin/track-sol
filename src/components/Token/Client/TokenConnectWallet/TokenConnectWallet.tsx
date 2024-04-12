@@ -2,6 +2,7 @@
 
 import WalletInput from '@/components/WalletInput/WalletInput';
 import { useQueryState } from 'nuqs';
+import TokenWalletDetails from '../TokenWalletDetails/TokenWalletDetails';
 import styles from './TokenConnectWallet.module.scss';
 
 const TokenConnectWallet = ({ tokenAddress }: ITokenConnectWallet) => {
@@ -21,7 +22,7 @@ const TokenConnectWallet = ({ tokenAddress }: ITokenConnectWallet) => {
       <div className={styles.tokenConnectWalletBtnWrapper}>
         <WalletInput tokenAddress={tokenAddress} />
       </div>
-      {/* {walletParam && <TokenWalletDetails tokenAddress={tokenAddress} />} */}
+      {walletParam && <TokenWalletDetails tokenAddress={tokenAddress} />}
     </div>
   );
 };
