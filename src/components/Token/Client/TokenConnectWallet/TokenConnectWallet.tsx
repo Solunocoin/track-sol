@@ -1,6 +1,5 @@
 'use client';
 
-import WalletInput from '@/components/WalletInput/WalletInput';
 import { useQueryState } from 'nuqs';
 import styles from './TokenConnectWallet.module.scss';
 
@@ -18,8 +17,21 @@ const TokenConnectWallet = ({ tokenAddress }: ITokenConnectWallet) => {
           </span>
         </h5>
       </div>
-      <div className={styles.tokenConnectWalletBtnWrapper}>
-        <WalletInput tokenAddress={tokenAddress} />
+      <div
+        className={styles.tokenConnectWalletBtnWrapper}
+        style={{
+          width: '100%',
+        }}
+      >
+        {/* <WalletInput tokenAddress={tokenAddress} /> */}
+        <h4
+          style={{
+            textAlign: 'center',
+            width: '100%',
+          }}
+        >
+          Coming Soon...
+        </h4>
       </div>
       {/* {walletParam && <TokenWalletDetails tokenAddress={tokenAddress} />} */}
     </div>
