@@ -38,7 +38,12 @@ const getTokensBestPair = async (
       error: null,
     };
   } catch (error) {
-    throw new Error('Error fetching dex screener data');
+    return{
+      data: null,
+      error: {
+        message: "Error in retrieving best pair from dexScreener"
+      }
+    }
   }
 };
 
