@@ -29,7 +29,7 @@ const TokenAddressInput = () => {
         router.push(`/wallet/${token}`);
       }
     } catch (error) {
-      router.push(`/error`);
+      router.push(`/token/${token}`);
     } finally {
       setLoading(false);
     }
