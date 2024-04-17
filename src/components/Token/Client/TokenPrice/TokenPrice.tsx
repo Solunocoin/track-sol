@@ -10,7 +10,6 @@ const TokenPrice = ({tokenBestPair }: ITokenPrice) => {
       : tokenPrice > 1
       ? "$" + formatNumber(Number(tokenPrice), 3)
       : "-";
-  content = "Not launched";
 
   return <h4>{content}</h4>;
 };
