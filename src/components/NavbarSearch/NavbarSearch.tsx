@@ -1,14 +1,18 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { notFound, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
+import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import { PublicKey } from '@solana/web3.js';
+import { solana } from '../../../lib/solana';
 import Button from '../Button/Button';
 import styles from './NavbarSearch.module.scss';
 
 const NavbarSearch = () => {
   const router = useRouter();
   const [token, setToken] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -36,10 +40,36 @@ const NavbarSearch = () => {
     };
   }, [token, router]);
 
+  const handleSearch = async () => {
+    try {
+      setLoading(true);
+      const tokenAddress = new PublicKey(token);
+
+      if (!tokenAddress) {
+        notFound();
+      }
+
+      const accountInfo = await solana.getAccountInfo(tokenAddress);
+
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+
+      setToken('');
+      if (accountInfo?.owner.equals(TOKEN_PROGRAM_ID)) {
+        router.push(`/token/${token}`);
+      } else {
+        router.push(`/wallet/${token}`);
+      }
+    } catch (error) {
+      router.push(`/error`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className={styles.navbarSearch}>
       <input
-        placeholder="Search Token Address (cmd + k)"
+        placeholder="Search any Token or Wallet Address (cmd + k)"
         type="text"
         className={styles.navbarSearchInput}
         value={token}
@@ -48,23 +78,19 @@ const NavbarSearch = () => {
           // Optionally, you can handle the Enter key when the input is focused
           if (e.key === 'Enter' && token) {
             e.preventDefault();
-            setToken('');
-            router.push(`/token/${token}`);
+            handleSearch();
           }
         }}
       />
       <div className={styles.navbarSearchButtonWrapper}>
         <Button
-          onClick={() => {
-            router.push(`/token/${token}`);
-            setToken('');
-          }}
-          disabled={!token}
+          onClick={() => handleSearch()}
+          disabled={!token || loading}
           style={{
             height: '100%',
           }}
         >
-          Search
+          {loading ? 'Searching' : 'Search'}
         </Button>
       </div>
     </div>

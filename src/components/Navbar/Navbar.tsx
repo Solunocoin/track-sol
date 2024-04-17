@@ -51,10 +51,6 @@ const Navbar = () => {
             alt="Website Logo"
             href="https://www.soluno.io/"
           />
-
-          <Link href="/wallet/4NdPokJKEyozbcXzhj9KN4gMcgBNBwxdeNitg9dYGsex">
-            wallet
-          </Link>
         </div>
       </div>
     </div>

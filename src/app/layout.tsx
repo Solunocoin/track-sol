@@ -1,9 +1,11 @@
 import Navbar from '@/components/Navbar/Navbar';
+
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 import { Barlow } from 'next/font/google';
 import Script from 'next/script';
 import { SkeletonTheme } from 'react-loading-skeleton';
+
 import 'react-loading-skeleton/dist/skeleton.css';
 import './globals.scss';
 

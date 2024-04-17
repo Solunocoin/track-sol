@@ -5,6 +5,7 @@ import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import { PublicKey } from '@solana/web3.js';
 import Link from 'next/link';
 import { solana } from '../../../../lib/solana';
+import WalletHeader from '../WalletHeader/WalletHeader';
 import WalletTokenBalance from '../WalletTokenBalance/WalletTokenBalance';
 import WalletTokenInfo from '../WalletTokenInfo/WalletTokenInfo';
 import WalletTokenPrice from '../WalletTokenPrice/WalletTokenPrice';
@@ -24,15 +25,26 @@ const WalletTokenList = async ({ walletAddress }: IWalletTokenList) => {
 
   console.log('walletSolBalance', walletSolBalance / 10 ** 9);
 
-  // tokens.push({
-  //   address: 'sol',
-  //   balance: walletSolBalance / 10 ** 9,
-  //   name: 'Solana',
-  //   symbol: 'SOL',
-  //   logo: '/solana.svg',
-  //   price: solPrice,
-  //   value: (walletSolBalance / 10 ** 9) * solPrice,
-  // });
+  tokens.push({
+    address: 'sol',
+    balance: walletSolBalance / 10 ** 9,
+    name: 'Solana',
+    symbol: 'SOL',
+    logo: 'https://api.phantom.app/image-proxy/?image=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2Fsolana-labs%2Ftoken-list%40main%2Fassets%2Fmainnet%2FSo11111111111111111111111111111111111111112%2Flogo.png&fit=cover&width=256&height=256',
+    price: solPrice?.price,
+    value: (walletSolBalance / 10 ** 9) * solPrice?.price,
+    priceChange: {
+      h1: 0,
+      h6: 0,
+      m5: 0,
+      h24: solPrice?.change24h,
+    },
+    quoteToken: {
+      address: 'usd',
+      name: 'USD',
+      symbol: 'USD',
+    },
+  });
 
   const tokenAccounts = await solana.getParsedTokenAccountsByOwner(
     new PublicKey(walletAddress),
@@ -89,6 +101,8 @@ const WalletTokenList = async ({ walletAddress }: IWalletTokenList) => {
           flexDirection: 'column',
         }}
       >
+        <WalletHeader tokens={tokens} walletAddress={walletAddress} />
+
         <div className={styles.walletListHeader}>
           <div>Token</div>
           <div>Price</div>

@@ -18,7 +18,7 @@ const WalletTokenPrice = async ({ token }: IWalletTokenPrice) => {
           color: priceChange > 0 ? 'green' : 'red',
         }}
       >
-        {priceChange}%
+        {priceChange.toFixed(2)}%
       </h3>
     </div>
   );

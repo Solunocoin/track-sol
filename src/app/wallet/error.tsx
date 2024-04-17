@@ -3,8 +3,8 @@ import LogoLink from '@/components/LogoLink/LogoLink';
 import Main from '@/components/Main/Main';
 import TokenAddressInput from '@/components/Token/Client/TokenAddressInput/TokenAddressInput';
 import Lottie from 'lottie-react';
-import telegramLogo from '../../../../public/telegram_logo.png';
-import noFoundLottie from '../../../lottie/not-found.json';
+import telegramLogo from '../../../public/telegram_logo.png';
+import noFoundLottie from '../../lottie/not-found.json';
 
 const error = () => {
   return (

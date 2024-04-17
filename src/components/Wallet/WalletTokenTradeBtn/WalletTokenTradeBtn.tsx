@@ -8,7 +8,7 @@ const WalletTokenTradeBtn = async ({
 
   return (
     <a className={styles.tokenTradeBtn} href={jupiterLink} target="_blank">
-      Trade
+      Info
     </a>
   );
 };

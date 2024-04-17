@@ -1,0 +1,42 @@
+@import '../../../scss/breakpoints';
+
+.walletHeader {
+  position: relative;
+  width: 100%;
+  color: #fff;
+  padding: 1.5rem 1rem; // Default mobile styles
+  margin: 0;
+  font-weight: 700;
+  border-radius: 1em;
+  background: linear-gradient(
+    270deg,
+    rgba(17, 20, 41, 1) 0%,
+    rgba(19, 26, 55, 1) 100%
+  );
+  transition: 0.3s;
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: inset 0px 1px 1px rgba(127, 143, 255, 0.25);
+
+  h3 {
+    font-size: 0.9em !important;
+    z-index: 6;
+  }
+
+  h2 {
+    line-height: 1em;
+    display: inline-flex;
+    font-size: 1.6em;
+  }
+
+  @include bp-m {
+    padding: 1.5rem 1.5rem; // Default tablet styles
+  }
+}
+
+.walletHeaderTracking {
+  text-align: right;
+}
