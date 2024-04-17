@@ -2,7 +2,7 @@ import truncateString from '@/utils/truncateString';
 import { QuestionCircle } from 'react-bootstrap-icons';
 import styles from './WalletTokenInfo.module.scss';
 
-const WalletTokenInfo = async ({
+const WalletTokenInfo = ({
   tokenName,
   tokenSymbol,
   tokenLogo,

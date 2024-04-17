@@ -1,5 +1,4 @@
 import formatNumber from "@/utils/formatNumber";
-import getTokenPrice from "@/utils/getTokenPrice";
 
 const TokenMarketCap =  ({
   totalSupply,

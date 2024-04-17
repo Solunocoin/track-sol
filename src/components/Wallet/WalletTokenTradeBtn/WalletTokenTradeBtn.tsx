@@ -1,6 +1,6 @@
-import styles from './TokenTradeBtn.module.scss';
+import styles from "./TokenTradeBtn.module.scss";
 
-const WalletTokenTradeBtn = async ({
+const WalletTokenTradeBtn = ({
   baseToken,
   quoteToken,
 }: IWalletTokenTradeBtn) => {

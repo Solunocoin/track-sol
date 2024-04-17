@@ -1,4 +1,4 @@
-const WalletTokenPrice = async ({ token }: IWalletTokenPrice) => {
+const WalletTokenPrice = ({ token }: IWalletTokenPrice) => {
   let priceChange = 0;
 
   if (token.priceChange.h24) {

@@ -61,10 +61,7 @@ const TokenDetails = async ({ tokenAddress, tokenBestPair }: ITokenDetails) => {
 
       <div className={styles.tokenDetailsTradeBtnContainer}>
         <Suspense fallback={<Skeleton height="100%" />}>
-          <TokenTradeBtn
-            tokenAddress={tokenAddress}
-            tokenBestPair={tokenBestPair}
-          />
+          <TokenTradeBtn tokenBestPair={tokenBestPair} />
         </Suspense>
       </div>
     </TokenDetailsContainer>
