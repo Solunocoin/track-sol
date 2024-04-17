@@ -1,6 +1,6 @@
 import styles from "./TokenTradeBtn.module.scss";
 
-const TokenTradeBtn = ({ tokenAddress, tokenBestPair }: ITokenTradeBtn) => {
+const TokenTradeBtn = ({tokenBestPair }: ITokenTradeBtn) => {
   const jupiterLink = `https://jup.ag/swap/${tokenBestPair.quoteToken.address}-${tokenBestPair.baseToken.address}`;
 
   return (

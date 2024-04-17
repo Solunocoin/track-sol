@@ -1,6 +1,6 @@
 import formatNumber from '@/utils/formatNumber';
 
-const WalletTokenBalance = async ({ token }: IWalletTokenPrice) => {
+const WalletTokenBalance =  ({ token }: IWalletTokenPrice) => {
   const balance = token?.balance;
   const tokenValue = token?.value;
 
