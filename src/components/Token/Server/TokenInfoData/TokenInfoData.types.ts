@@ -1,3 +1,3 @@
-interface ITokenInfo {
+interface ITokenInfoData {
   tokenAddress: string;
 }

@@ -4,7 +4,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import TokenDataInfo from '../../Server/TokenInfoData/TokenInfoData';
 import styles from './TokenInfo.module.scss';
 
-const TokenInfo = async ({ tokenAddress }: ITokenInfo) => {
+const TokenInfo = async ({ tokenAddress, tokenBestPair }: ITokenInfo) => {
   return (
     <div className={styles.tokenInfoWrapper}>
       <div>

@@ -7,7 +7,7 @@ import { QuestionCircle } from 'react-bootstrap-icons';
 import { solana } from '../../../../../lib/solana';
 import styles from './TokenInfoData.module.scss';
 
-const TokenDataInfo = async ({ tokenAddress }: ITokenInfo) => {
+const TokenDataInfo = async ({ tokenAddress }: ITokenInfoData) => {
   const metaplex = Metaplex.make(solana);
 
   const mintAddress = new PublicKey(tokenAddress);
