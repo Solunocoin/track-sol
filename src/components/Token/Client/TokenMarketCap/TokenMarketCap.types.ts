@@ -1,4 +1,4 @@
 interface ITokenMarketCap {
-  tokenAddress: string;
   totalSupply: number;
+  tokenBestPair: DexScreenerPairType;
 }

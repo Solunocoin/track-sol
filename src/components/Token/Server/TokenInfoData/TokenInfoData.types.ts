@@ -1,3 +1,4 @@
-interface ITokenInfo {
+interface ITokenInfoData {
   tokenAddress: string;
+  tokenBestPair:DexScreenerPairType;
 }

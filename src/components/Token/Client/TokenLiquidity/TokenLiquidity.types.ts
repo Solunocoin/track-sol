@@ -1,0 +1,4 @@
+interface ITokenLiquidity {
+
+  tokenBestPair:DexScreenerPairType;
+}

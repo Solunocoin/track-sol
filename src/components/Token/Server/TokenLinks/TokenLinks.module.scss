@@ -24,6 +24,8 @@
 .tokenLinks {
   display: flex;
   align-items: center;
-  justify-content: center;
   transition: 0.3s;
+  justify-content: flex-end;
+  flex-wrap: wrap;
 }
+

@@ -1,5 +1,4 @@
-interface ITokenWalletData {
+interface ITokenTradeBtn {
   tokenAddress: string;
-  walletAddress: string;
   tokenBestPair: DexScreenerPairType;
 }

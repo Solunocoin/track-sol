@@ -1,12 +1,15 @@
-import { Suspense } from 'react';
-import Skeleton from 'react-loading-skeleton';
-import Token24hVolume from '../../Server/Token24hVolume/Token24hVolume';
-import TokenHolders from '../../Server/TokenHolders/TokenHolders';
-import TokenLiquidity from '../../Server/TokenLiquidity/TokenLiquidity';
-import TokenDetailsContainer from '../TokenDetailsContainer/TokenDetailsContainer';
-import styles from './TokenMoreDetails.module.scss';
+import { Suspense } from "react";
+import Skeleton from "react-loading-skeleton";
+import Token24hVolume from "../Token24hVolume/Token24hVolume";
+import TokenHolders from "../../Server/TokenHolders/TokenHolders";
+import TokenLiquidity from "../TokenLiquidity/TokenLiquidity";
+import TokenDetailsContainer from "../TokenDetailsContainer/TokenDetailsContainer";
+import styles from "./TokenMoreDetails.module.scss";
 
-const TokenMoreDetails = async ({ tokenAddress }: ITokenInfo) => {
+const TokenMoreDetails = ({
+  tokenAddress,
+  tokenBestPair,
+}: ITokenMoreDetails) => {
   return (
     <TokenDetailsContainer innerClassName={styles.tokenMoreDetails}>
       <div>
@@ -20,27 +23,27 @@ const TokenMoreDetails = async ({ tokenAddress }: ITokenInfo) => {
 
       <div
         style={{
-          textAlign: 'center',
+          textAlign: "center",
         }}
       >
         <h3>Liquidity</h3>
 
         <div className={styles.tokenMoreDetailsItemInner}>
           <Suspense fallback={<Skeleton height="100%" width="60%" />}>
-            <TokenLiquidity tokenAddress={tokenAddress} />
+            <TokenLiquidity tokenBestPair={tokenBestPair} />
           </Suspense>
         </div>
       </div>
 
       <div
         style={{
-          textAlign: 'right',
+          textAlign: "right",
         }}
       >
         <h3>24h Volume</h3>
         <div className={styles.tokenMoreDetailsItemInner}>
           <Suspense fallback={<Skeleton width="60%" />}>
-            <Token24hVolume tokenAddress={tokenAddress} />
+            <Token24hVolume tokenBestPair={tokenBestPair} />
           </Suspense>
         </div>
       </div>

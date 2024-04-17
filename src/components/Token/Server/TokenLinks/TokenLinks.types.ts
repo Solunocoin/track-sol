@@ -1,3 +1,3 @@
-interface ITokenHolders {
+interface ITokenLinks {
   tokenAddress: string;
 }
