@@ -86,9 +86,10 @@ const WalletTokenList = async ({ walletAddress }: IWalletTokenList) => {
     });
   });
 
-  const allTokensMapSorted = tokens.sort((a, b) => b.value - a.value);
+  const filteredTokens = tokens.filter((token) => token.value > 0);
+  const allTokensMapSorted = filteredTokens.sort((a, b) => b.value - a.value);
 
-  console.log('tokens', tokens);
+  console.log('allTokensMapSorted', allTokensMapSorted);
 
   return (
     <div
@@ -103,7 +104,7 @@ const WalletTokenList = async ({ walletAddress }: IWalletTokenList) => {
           flexDirection: 'column',
         }}
       >
-        <WalletHeader tokens={tokens} walletAddress={walletAddress} />
+        <WalletHeader tokens={allTokensMapSorted} walletAddress={walletAddress} />
 
         <div className={styles.walletListHeader}>
           <div>Token</div>
