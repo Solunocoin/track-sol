@@ -1,2 +1,1 @@
-export declare const clipboard: string;
-export declare const clipboardText: string;
+export declare const divider: string;

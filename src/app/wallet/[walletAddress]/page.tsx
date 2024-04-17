@@ -7,7 +7,7 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-const tokenAddress = ({ params }: Props) => {
+const tokenAddress = async ({ params }: Props) => {
   return (
     <Main>
       <Card>

@@ -7,7 +7,7 @@ import { QuestionCircle } from 'react-bootstrap-icons';
 import { solana } from '../../../../../lib/solana';
 import styles from './TokenInfoData.module.scss';
 
-const TokenDataInfo = async ({ tokenAddress, reverse = false }: ITokenInfo) => {
+const TokenDataInfo = async ({ tokenAddress }: ITokenInfo) => {
   const metaplex = Metaplex.make(solana);
 
   const mintAddress = new PublicKey(tokenAddress);
@@ -31,13 +31,17 @@ const TokenDataInfo = async ({ tokenAddress, reverse = false }: ITokenInfo) => {
     tokenName = token.name;
     tokenSymbol = token.symbol;
 
-    const logoFetch = await fetch(token.json?.image as string);
+    try {
+      const logoFetch = await fetch(token.json?.image as string);
 
-    if (logoFetch.status === 200) {
-      tokenLogo = token.json?.image;
-    } else {
-      const bestPair = await getTokensBestPair(tokenAddress);
-      tokenLogo = bestPair.data?.info.imageUrl;
+      if (logoFetch.status === 200) {
+        tokenLogo = token.json?.image;
+      } else {
+        const bestPair = await getTokensBestPair(tokenAddress);
+        tokenLogo = bestPair.data?.info.imageUrl;
+      }
+    } catch (error) {
+      throw new Error('Error in fetching token logo');
     }
   } else {
     const provider = await new TokenListProvider().resolve();
@@ -72,11 +76,7 @@ const TokenDataInfo = async ({ tokenAddress, reverse = false }: ITokenInfo) => {
   }
 
   return (
-    <div
-      className={`${styles.tokenInfoData} ${
-        reverse ? styles.tokenInfoDataReverse : ''
-      }`}
-    >
+    <div className={`${styles.tokenInfoData}`}>
       <div className={styles.tokenInfoDataName}>
         <h4>{truncateString(tokenName, 15)}</h4>
         <h5>{tokenSymbol}</h5>

@@ -4,28 +4,16 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import TokenDataInfo from '../../Server/TokenInfoData/TokenInfoData';
 import styles from './TokenInfo.module.scss';
 
-const TokenInfo = async ({ tokenAddress, reverse }: ITokenInfo) => {
+const TokenInfo = async ({ tokenAddress }: ITokenInfo) => {
   return (
-    <div
-      className={styles.tokenInfoWrapper}
-      style={{
-        marginBottom: reverse ? '0rem' : '1rem',
-      }}
-    >
-      {!reverse && (
-        <div>
-          <h2>Token Info</h2>
-        </div>
-      )}
+    <div className={styles.tokenInfoWrapper}>
+      <div>
+        <h2>Token Info</h2>
+      </div>
 
-      <div
-        className={styles.tokenInfoDataWrapper}
-        style={{
-          justifyContent: reverse ? 'flex-start' : 'flex-end',
-        }}
-      >
+      <div className={styles.tokenInfoDataWrapper}>
         <Suspense fallback={<Skeleton height="100%" width="100px" />}>
-          <TokenDataInfo reverse={reverse} tokenAddress={tokenAddress} />
+          <TokenDataInfo tokenAddress={tokenAddress} />
         </Suspense>
       </div>
     </div>

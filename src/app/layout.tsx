@@ -13,9 +13,9 @@ const barlow = Barlow({
 });
 
 export const metadata: Metadata = {
-  title: 'SolTrack - Ultimate Solana Token/Wallet Tracker',
+  title: 'TrackSol - Ultimate Solana Token/Wallet Tracker',
   description:
-    'Track any Solana wallet and their holdings with SolTrack. Get detailed information about any Solana token and its holders.',
+    'Track any Solana wallet and their holdings with TrackSol. Get detailed information about any Solana token and its holders.',
   openGraph: {
     images: `https://tracksol.io/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.4774ccb0.png&w=2048&q=75`,
     title: 'TrackSol - Ultimate Solana Token/Wallet Tracker',

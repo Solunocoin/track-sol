@@ -1,6 +1,5 @@
 import Card from '@/components/Card/Card';
 import Main from '@/components/Main/Main';
-import TokenConnectWallet from '@/components/Token/Client/TokenConnectWallet/TokenConnectWallet';
 import TokenDetails from '@/components/Token/Client/TokenDetails/TokenDetails';
 import TokenInfo from '@/components/Token/Client/TokenInfo/TokenInfo';
 import TokenLinks from '@/components/Token/Client/TokenLinks/TokenLinks';
@@ -19,7 +18,7 @@ const tokenAddress = ({ params }: Props) => {
         <TokenDetails tokenAddress={params.tokenAddress} />
         <TokenLinks tokenAddress={params.tokenAddress} />
         <TokenMoreDetails tokenAddress={params.tokenAddress} />
-        <TokenConnectWallet tokenAddress={params.tokenAddress} />
+        {/* <TokenConnectWallet tokenAddress={params.tokenAddress} /> */}
       </Card>
     </Main>
   );

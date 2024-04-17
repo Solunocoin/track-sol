@@ -1,10 +1,39 @@
+import Divider from '@/components/Divider/Divider';
+import { fetchTokenData } from '@/utils/getAllTokens';
+import { getSolPrice } from '@/utils/getSolPrice';
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import { PublicKey } from '@solana/web3.js';
+import Link from 'next/link';
 import { solana } from '../../../../lib/solana';
+import WalletTokenBalance from '../WalletTokenBalance/WalletTokenBalance';
+import WalletTokenInfo from '../WalletTokenInfo/WalletTokenInfo';
 import WalletTokenPrice from '../WalletTokenPrice/WalletTokenPrice';
+import WalletTokenTradeBtn from '../WalletTokenTradeBtn/WalletTokenTradeBtn';
 import styles from './WalletTokenList.module.scss';
 
 const WalletTokenList = async ({ walletAddress }: IWalletTokenList) => {
+  const tokens: WalletTokenType[] = [];
+
+  const walletSolBalance = await solana.getBalance(
+    new PublicKey(walletAddress),
+  );
+
+  const solPrice = await getSolPrice();
+
+  console.log('solPrice', solPrice);
+
+  console.log('walletSolBalance', walletSolBalance / 10 ** 9);
+
+  // tokens.push({
+  //   address: 'sol',
+  //   balance: walletSolBalance / 10 ** 9,
+  //   name: 'Solana',
+  //   symbol: 'SOL',
+  //   logo: '/solana.svg',
+  //   price: solPrice,
+  //   value: (walletSolBalance / 10 ** 9) * solPrice,
+  // });
+
   const tokenAccounts = await solana.getParsedTokenAccountsByOwner(
     new PublicKey(walletAddress),
     {
@@ -12,80 +41,40 @@ const WalletTokenList = async ({ walletAddress }: IWalletTokenList) => {
     },
   );
 
-  const tokensData = tokenAccounts.value.filter(
+  const tokenAccountsFiltered = tokenAccounts.value.filter(
     (token) => token.account.data.parsed.info.tokenAmount.uiAmount > 0,
   );
 
-  console.log('tokensData', tokensData[0].account.data);
-
-  const tokenAddresses = tokensData.map(
+  const tokenAddresses = tokenAccountsFiltered.map(
     (token) => token.account.data.parsed.info.mint,
   );
 
-  // console.log('tokens', tokenAddresses);
+  const allTokens = await fetchTokenData(tokenAddresses);
 
-  // console.log('tokenAccounts', tokenAccounts.value[5].account.data.parsed.info);
+  allTokens.forEach((token) => {
+    const tokenInfo = tokenAccountsFiltered.find(
+      (t) => t.account.data.parsed.info.mint === token.baseToken.address,
+    );
 
-  // const response = await fetch(
-  //   `https://api.dexscreener.com/latest/dex/tokens/${tokenAddresses.join(',')}`,
-  // );
+    const tokenBalance =
+      tokenInfo?.account.data.parsed.info.tokenAmount.uiAmount;
 
-  // const data: TokenDetailsResponseType = await response.json();
+    const tokenValue = tokenBalance * parseFloat(token.priceUsd);
 
-  // const groupedByBaseTokenAddress = data?.pairs?.reduce(
-  //   (accumulator, currentValue) => {
-  //     // Get the address you want to group by
-  //     const address = currentValue.baseToken.address;
+    tokens.push({
+      address: token.baseToken.address,
+      name: token.baseToken.name,
+      symbol: token.baseToken.symbol,
+      logo: token.info.imageUrl,
+      price: parseFloat(token.priceUsd),
+      priceChange: token.priceChange,
+      balance: tokenBalance,
+      value: tokenValue,
+      quoteToken: token.quoteToken,
+    });
+  });
 
-  //     // Check if there's already an entry for this address
-  //     let group = accumulator.find((group) => group?.address === address);
-
-  //     // If the group doesn't exist, create it and add to the accumulator
-  //     if (!group) {
-  //       group = { address: address, pairs: [] };
-  //       accumulator.push(group);
-  //     }
-
-  //     // Add the current item to the group's pairs array
-  //     group.pairs.push(currentValue);
-
-  //     return accumulator;
-  //   },
-  //   [],
-  // );
-
-  // console.log('groupedByBaseTokenAddress', groupedByBaseTokenAddress);
-
-  // const bestPairRes = await getTokensBestPair(tokenAddress);
-  // const bestPair = bestPairRes?.data;
-
-  // console.log('bestPair', bestPair);
-
-  // console.log('Token                                         Balance');
-  // console.log('------------------------------------------------------------');
-  // tokenAccounts.value.forEach((tokenAccount) => {
-  //   const accountData = AccountLayout.decode(tokenAccount.account.data);
-
-  //   console.log(
-  //     `${new PublicKey(accountData.mint)}   ${
-  //       Number(accountData.amount) / 10 ** supply.value.decimals
-  //     }`,
-  //   );
-  // });
-
-  // let balance = 0;
-  // let percentage = 0;
-  // let value = 0;
-
-  // if (tokenAccounts.value?.[0]) {
-  //   const accountData = AccountLayout.decode(
-  //     tokenAccounts.value?.[0]?.account?.data,
-  //   );
-
-  //   balance = Number(accountData.amount) / 10 ** supply.value.decimals;
-  //   percentage = (balance / Number(supply?.value?.uiAmount)) * 100;
-  //   value = Number(balance) * Number(bestPair?.priceUsd);
-  // }
+  const allTokensMapSorted = tokens.sort((a, b) => b.value - a.value);
 
   return (
     <div
@@ -104,24 +93,31 @@ const WalletTokenList = async ({ walletAddress }: IWalletTokenList) => {
           <div>Token</div>
           <div>Price</div>
           <div>Amount</div>
-          <div>Info</div>
+          <div className={styles.walletListHeaderInfo}>Info</div>
         </div>
-        <hr />
-        {tokensData.map((token, index) => (
-          <div key={index} className={styles.walletListItem}>
-            {/* <TokenInfo
-              reverse={true}
-              tokenAddress={token.account.data.parsed.info.mint}
-            /> */}
 
-            <WalletTokenPrice
-              tokenAddress={token.account.data.parsed.info.mint}
+        <Divider />
+
+        {allTokensMapSorted.map((token, index) => (
+          <Link
+            href={`/token/${token.address}`}
+            key={index}
+            className={styles.walletListItem}
+          >
+            <WalletTokenInfo
+              tokenLogo={token?.logo}
+              tokenName={token.name}
+              tokenSymbol={token.symbol}
             />
-            <WalletTokenPrice
-              tokenAddress={token.account.data.parsed.info.mint}
+
+            <WalletTokenPrice token={token} />
+
+            <WalletTokenBalance token={token} />
+            <WalletTokenTradeBtn
+              baseToken={token.address}
+              quoteToken={token.quoteToken.address}
             />
-            <div>Trade</div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

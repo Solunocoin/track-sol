@@ -1,5 +1,5 @@
 type GetTokensBestPairType = {
-  data: TokenDetailsType | null;
+  data: DexScreenerPairType | null;
   error: {
     message: string;
   } | null;
@@ -16,7 +16,7 @@ const getTokensBestPair = async (
       },
     );
 
-    const data: TokenDetailsResponseType = await response.json();
+    const data: DexScreenerResponseType = await response.json();
 
     if (data.pairs === null || data.pairs.length === 0) {
       return {
@@ -27,7 +27,7 @@ const getTokensBestPair = async (
       };
     }
 
-    const pairs: TokenDetailsType[] = data.pairs;
+    const pairs: DexScreenerPairType[] = data.pairs;
 
     const bestPair = pairs.reduce((prev, current) => {
       return prev.liquidity.usd > current.liquidity.usd ? prev : current;
@@ -38,12 +38,12 @@ const getTokensBestPair = async (
       error: null,
     };
   } catch (error) {
-    return{
+    return {
       data: null,
       error: {
-        message: "Error in retrieving best pair from dexScreener"
-      }
-    }
+        message: 'Error in retrieving best pair from dexScreener',
+      },
+    };
   }
 };
 

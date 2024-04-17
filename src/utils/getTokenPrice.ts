@@ -10,18 +10,20 @@ interface TokenPriceResponse {
   success: boolean;
 }
 
-export default async function getTokenPrice(tokenAddress: string): Promise<number | null> {
+export default async function getTokenPrice(
+  tokenAddress: string,
+): Promise<number | null> {
   try {
-    const apiKey = process.env.BIRD_EYE; // Replace 'YOUR_API_KEY' with your actual API key
+    const BIRD_EYE_KEY = process.env.BIRD_EYE_KEY; // Replace 'YOUR_API_KEY' with your actual API key
     const url = `https://public-api.birdeye.so/defi/price?check_liquidity=1000.25&include_liquidity=true&address=${tokenAddress}`;
     const headers = {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'x-chain': 'solana',
-      'X-API-KEY': apiKey
+      'X-API-KEY': BIRD_EYE_KEY,
     };
 
     const response = await axios.get<TokenPriceResponse>(url, { headers });
-    console.log(response)
+    console.log(response);
     if (response.data.success) {
       return response.data.data.value;
     } else {

@@ -20,7 +20,7 @@ const Navbar = () => {
               marginRight: '10px',
             }}
           >
-            <Image fill src={logo} alt="soltrack logo" />
+            <Image fill src={logo} alt="TrackSol logo" />
           </div>
           <div>
             <Link href="/">
@@ -51,6 +51,10 @@ const Navbar = () => {
             alt="Website Logo"
             href="https://www.soluno.io/"
           />
+
+          <Link href="/wallet/4NdPokJKEyozbcXzhj9KN4gMcgBNBwxdeNitg9dYGsex">
+            wallet
+          </Link>
         </div>
       </div>
     </div>
