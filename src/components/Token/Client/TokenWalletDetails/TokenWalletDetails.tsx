@@ -1,23 +1,26 @@
-'use client';
+"use client";
 
-import Clipboard from '@/components/Clipboard/Clipboard';
-import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
-import { PublicKey } from '@solana/web3.js';
-import { useQueryState } from 'nuqs';
-import { Suspense, useEffect, useState } from 'react';
-import Skeleton from 'react-loading-skeleton';
-import { solana } from '../../../../../lib/solana';
-import TokenWalletData from '../../Server/TokenWalletData/TokenWalletData';
+import Clipboard from "@/components/Clipboard/Clipboard";
+import { TOKEN_PROGRAM_ID } from "@solana/spl-token";
+import { PublicKey } from "@solana/web3.js";
+import { useQueryState } from "nuqs";
+import { Suspense, useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
+import { solana } from "../../../../../lib/solana";
+import TokenWalletData from "../../Server/TokenWalletData/TokenWalletData";
 
-const TokenWalletDetails = ({ tokenAddress }: ITokenWalletDetails) => {
-  const [walletParam, setWalletParam] = useQueryState('wallet');
+const TokenWalletDetails = ({
+  tokenAddress,
+  tokenBestPair,
+}: ITokenWalletDetails) => {
+  const [walletParam, setWalletParam] = useQueryState("wallet");
   const [invalidWalletAddress, setInvalidWalletAddress] = useState(false);
 
   useEffect(() => {
     const fetch = async () => {
       try {
         const accountInfo = await solana.getAccountInfo(
-          new PublicKey(walletParam as string),
+          new PublicKey(walletParam as string)
         );
 
         if (accountInfo?.owner.equals(TOKEN_PROGRAM_ID)) {
@@ -36,22 +39,22 @@ const TokenWalletDetails = ({ tokenAddress }: ITokenWalletDetails) => {
   return (
     <div
       style={{
-        marginTop: '1rem',
+        marginTop: "1rem",
       }}
     >
       <Clipboard text={walletParam as string} title="Viewing" />
       {invalidWalletAddress ? (
         <div
           style={{
-            marginTop: '1rem',
-            color: 'red',
+            marginTop: "1rem",
+            color: "red",
           }}
         >
           <div>Invalid wallet address</div>
           <div
             style={{
-              fontSize: '14px',
-              color: '#fff',
+              fontSize: "14px",
+              color: "#fff",
             }}
           >
             Please make sure {`you're`} inputting a Solana wallet address.
@@ -60,7 +63,7 @@ const TokenWalletDetails = ({ tokenAddress }: ITokenWalletDetails) => {
       ) : (
         <div
           style={{
-            marginTop: '1rem',
+            marginTop: "1rem",
           }}
         >
           <Suspense
@@ -76,6 +79,7 @@ const TokenWalletDetails = ({ tokenAddress }: ITokenWalletDetails) => {
             <TokenWalletData
               tokenAddress={tokenAddress}
               walletAddress={walletParam as string}
+              tokenBestPair={tokenBestPair}
             />
           </Suspense>
         </div>

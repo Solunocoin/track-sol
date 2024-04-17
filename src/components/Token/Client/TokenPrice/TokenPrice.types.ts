@@ -1,0 +1,3 @@
+interface ITokenPrice {
+  tokenBestPair: DexScreenerPairType;
+}

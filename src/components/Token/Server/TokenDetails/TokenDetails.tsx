@@ -1,16 +1,16 @@
-import formatNumber from '@/utils/formatNumber';
-import { PublicKey } from '@metaplex-foundation/js';
-import { Suspense } from 'react';
-import Skeleton from 'react-loading-skeleton';
-import { solana } from '../../../../../lib/solana';
-import InfoTip from '../../../InfoTip/InfoTip';
-import TokenMarketCap from '../../Server/TokenMarketCap/TokenMarketCap';
-import TokenPrice from '../../Server/TokenPrice/TokenPrice';
-import TokenTradeBtn from '../../Server/TokenTradeBtn/TokenTradeBtn';
-import TokenDetailsContainer from '../TokenDetailsContainer/TokenDetailsContainer';
-import styles from './TokenDetails.module.scss';
+import formatNumber from "@/utils/formatNumber";
+import { PublicKey } from "@metaplex-foundation/js";
+import { Suspense } from "react";
+import Skeleton from "react-loading-skeleton";
+import { solana } from "../../../../../lib/solana";
+import InfoTip from "../../../InfoTip/InfoTip";
+import TokenMarketCap from "../../Client/TokenMarketCap/TokenMarketCap";
+import TokenPrice from "../../Client/TokenPrice/TokenPrice";
+import TokenTradeBtn from "../../Client/TokenTradeBtn/TokenTradeBtn";
+import TokenDetailsContainer from "../../Client/TokenDetailsContainer/TokenDetailsContainer";
+import styles from "./TokenDetails.module.scss";
 
-const TokenDetails = async ({ tokenAddress }: ITokenDetails) => {
+const TokenDetails = async ({ tokenAddress, tokenBestPair }: ITokenDetails) => {
   const supply = await solana.getTokenSupply(new PublicKey(tokenAddress));
   const totalSupply = supply.value.uiAmount;
 
@@ -24,13 +24,13 @@ const TokenDetails = async ({ tokenAddress }: ITokenDetails) => {
         <h3>Price</h3>
         <div className={styles.tokenDetailsItemInner}>
           <Suspense fallback={<Skeleton height="18px" width="80%" />}>
-            <TokenPrice tokenAddress={tokenAddress} />
+            <TokenPrice tokenBestPair={tokenBestPair} />
           </Suspense>
         </div>
       </div>
       <div>
         <h3>
-          Market Cap{' '}
+          Market Cap{" "}
           <InfoTip
             id="tool-tip-mCap"
             description="The circulating supply multiplied by the price. (Includes locked, excludes burned)"
@@ -39,15 +39,15 @@ const TokenDetails = async ({ tokenAddress }: ITokenDetails) => {
         <div className={styles.tokenDetailsItemInner}>
           <Suspense fallback={<Skeleton height="100%" width="80%" />}>
             <TokenMarketCap
-              tokenAddress={tokenAddress}
               totalSupply={totalSupply}
+              tokenBestPair={tokenBestPair}
             />
           </Suspense>
         </div>
       </div>
       <div>
         <h3>
-          Supply{' '}
+          Supply{" "}
           <InfoTip
             id="tool-tip-supply"
             description="The total supply of the token, including burned and locked tokens."
@@ -61,7 +61,10 @@ const TokenDetails = async ({ tokenAddress }: ITokenDetails) => {
 
       <div className={styles.tokenDetailsTradeBtnContainer}>
         <Suspense fallback={<Skeleton height="100%" />}>
-          <TokenTradeBtn tokenAddress={tokenAddress} />
+          <TokenTradeBtn
+            tokenAddress={tokenAddress}
+            tokenBestPair={tokenBestPair}
+          />
         </Suspense>
       </div>
     </TokenDetailsContainer>

@@ -1,8 +1,8 @@
 import Card from "@/components/Card/Card";
 import Main from "@/components/Main/Main";
-import TokenDetails from "@/components/Token/Client/TokenDetails/TokenDetails";
+import TokenDetails from "@/components/Token/Server/TokenDetails/TokenDetails";
 import TokenInfo from "@/components/Token/Client/TokenInfo/TokenInfo";
-import TokenLinks from "@/components/Token/Client/TokenLinks/TokenLinks";
+import TokenLinks from "@/components/Token/Server/TokenLinks/TokenLinks";
 import TokenMoreDetails from "@/components/Token/Client/TokenMoreDetails/TokenMoreDetails";
 import getTokensBestPair from "@/utils/getTokensBestPair";
 import { error } from "console";
@@ -25,7 +25,10 @@ const tokenAddress = async ({ params }: Props) => {
           tokenAddress={params.tokenAddress}
           tokenBestPair={bestPair.data}
         />
-        <TokenDetails tokenAddress={params.tokenAddress} />
+        <TokenDetails
+          tokenAddress={params.tokenAddress}
+          tokenBestPair={bestPair.data}
+        />
         <TokenLinks tokenAddress={params.tokenAddress} />
         <TokenMoreDetails
           tokenAddress={params.tokenAddress}

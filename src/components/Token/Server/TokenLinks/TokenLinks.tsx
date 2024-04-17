@@ -8,8 +8,6 @@ import telegramLogo from "../../../../../public/telegram_logo.png";
 import styles from "./TokenLinks.module.scss";
 import { Metaplex, PublicKey } from "@metaplex-foundation/js";
 import { solana } from "../../../../../lib/solana";
-import getTokensBestPair from "@/utils/getTokensBestPair";
-
 const TokenLinks = async ({ tokenAddress }: ITokenLinks) => {
   const metaplex = Metaplex.make(solana);
 

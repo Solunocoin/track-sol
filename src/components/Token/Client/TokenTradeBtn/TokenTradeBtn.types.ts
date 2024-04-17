@@ -1,4 +1,4 @@
-interface IToken24hVolume {
+interface ITokenTradeBtn {
   tokenAddress: string;
   tokenBestPair: DexScreenerPairType;
 }

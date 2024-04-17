@@ -1,12 +1,15 @@
 import { Suspense } from "react";
 import Skeleton from "react-loading-skeleton";
-import Token24hVolume from "../../Server/Token24hVolume/Token24hVolume";
+import Token24hVolume from "../Token24hVolume/Token24hVolume";
 import TokenHolders from "../../Server/TokenHolders/TokenHolders";
-import TokenLiquidity from "../../Server/TokenLiquidity/TokenLiquidity";
+import TokenLiquidity from "../TokenLiquidity/TokenLiquidity";
 import TokenDetailsContainer from "../TokenDetailsContainer/TokenDetailsContainer";
 import styles from "./TokenMoreDetails.module.scss";
 
-const TokenMoreDetails = async ({ tokenAddress, tokenBestPair }: ITokenMoreDetails) => {
+const TokenMoreDetails = ({
+  tokenAddress,
+  tokenBestPair,
+}: ITokenMoreDetails) => {
   return (
     <TokenDetailsContainer innerClassName={styles.tokenMoreDetails}>
       <div>
@@ -27,7 +30,7 @@ const TokenMoreDetails = async ({ tokenAddress, tokenBestPair }: ITokenMoreDetai
 
         <div className={styles.tokenMoreDetailsItemInner}>
           <Suspense fallback={<Skeleton height="100%" width="60%" />}>
-            <TokenLiquidity tokenAddress={tokenAddress} />
+            <TokenLiquidity tokenBestPair={tokenBestPair} />
           </Suspense>
         </div>
       </div>
@@ -40,7 +43,7 @@ const TokenMoreDetails = async ({ tokenAddress, tokenBestPair }: ITokenMoreDetai
         <h3>24h Volume</h3>
         <div className={styles.tokenMoreDetailsItemInner}>
           <Suspense fallback={<Skeleton width="60%" />}>
-            <Token24hVolume tokenAddress={tokenAddress} tokenBestPair={tokenBestPair} />
+            <Token24hVolume tokenBestPair={tokenBestPair} />
           </Suspense>
         </div>
       </div>

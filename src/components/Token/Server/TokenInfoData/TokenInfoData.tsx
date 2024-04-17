@@ -1,4 +1,4 @@
-import getTokensBestPair from '@/utils/getTokensBestPair';
+
 import truncateString from '@/utils/truncateString';
 import { Metaplex } from '@metaplex-foundation/js';
 import { ENV, TokenListProvider } from '@solana/spl-token-registry';
@@ -7,7 +7,7 @@ import { QuestionCircle } from 'react-bootstrap-icons';
 import { solana } from '../../../../../lib/solana';
 import styles from './TokenInfoData.module.scss';
 
-const TokenDataInfo = async ({ tokenAddress }: ITokenInfoData) => {
+const TokenDataInfo = async ({ tokenAddress, tokenBestPair }: ITokenInfoData) => {
   const metaplex = Metaplex.make(solana);
 
   const mintAddress = new PublicKey(tokenAddress);
@@ -37,8 +37,7 @@ const TokenDataInfo = async ({ tokenAddress }: ITokenInfoData) => {
       if (logoFetch.status === 200) {
         tokenLogo = token.json?.image;
       } else {
-        const bestPair = await getTokensBestPair(tokenAddress);
-        tokenLogo = bestPair.data?.info.imageUrl;
+        tokenLogo = tokenBestPair.info.imageUrl;
       }
     } catch (error) {
       throw new Error('Error in fetching token logo');
@@ -63,15 +62,14 @@ const TokenDataInfo = async ({ tokenAddress }: ITokenInfoData) => {
       if (logoFetch.status === 200) {
         tokenLogo = token.json?.image;
       } else {
-        const bestPair = await getTokensBestPair(tokenAddress);
-        tokenLogo = bestPair.data?.info.imageUrl;
+        tokenLogo = tokenBestPair.info.imageUrl;
       }
     } else {
-      const bestPair = await getTokensBestPair(tokenAddress);
+    
 
-      tokenName = bestPair.data?.baseToken.name;
-      tokenSymbol = bestPair.data?.baseToken.symbol;
-      tokenLogo = bestPair.data?.info?.imageUrl;
+      tokenName = tokenBestPair.baseToken.name;
+      tokenSymbol = tokenBestPair.baseToken.symbol;
+      tokenLogo = tokenBestPair.info.imageUrl;
     }
   }
 
