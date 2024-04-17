@@ -88,6 +88,8 @@ const WalletTokenList = async ({ walletAddress }: IWalletTokenList) => {
 
   const allTokensMapSorted = tokens.sort((a, b) => b.value - a.value);
 
+  console.log('tokens', tokens);
+
   return (
     <div
       style={{
