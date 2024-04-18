@@ -7,3 +7,55 @@
 .tokenMoreDetailsItemInner {
   height: 18px;
 }
+
+.tokenMoreDetails {
+  position: relative;
+  width: 100%;
+  background: rgb(46, 81, 245);
+  background: linear-gradient(
+    15deg,
+    rgba(46, 81, 245, 0.5) 0%,
+    rgba(64, 224, 255, 0.5) 23%,
+    rgba(240, 20, 178, 0.5) 49%,
+    rgba(253, 223, 6, 0.5) 77%,
+    rgba(245, 138, 37, 0.5) 100%
+  );
+  border-radius: 1.05em;
+  padding: 1px;
+  overflow: visible;
+}
+
+.tokenMoreDetailsInner {
+  position: relative;
+  background: #0c0e1c;
+  width: 100%;
+  z-index: 5;
+  border-radius: 1rem;
+  padding: 1rem;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 5px;
+  row-gap: 1rem;
+
+  h3 {
+    font-size: 14px;
+    line-height: 18px;
+    color: #bcc2ed;
+    font-weight: 500;
+
+    @include bp-s {
+      font-size: 16px;
+    }
+  }
+
+  h4 {
+    font-size: 14px;
+    line-height: 18px;
+    color: #fff;
+    font-weight: 700;
+
+    @include bp-m {
+      font-size: 16px;
+    }
+  }
+}
