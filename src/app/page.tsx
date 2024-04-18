@@ -99,7 +99,7 @@ export default function Home() {
             </p>
           </div>
           <div className={styles.indexPoweredItem}>
-            <h2>Wallet Tracker (Coming Soon)</h2>
+            <h2>Wallet Tracker</h2>
             <p>
               Track any Solana wallet or connect your own wallet to see all the
               holdings in one place. See how much your wallet has made or lost
