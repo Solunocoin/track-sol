@@ -1,12 +1,12 @@
-import Button from '@/components/Button/Button';
-import LogoLink from '@/components/LogoLink/LogoLink';
-import Image from 'next/image';
-import Link from 'next/link';
-import browserLogo from '../../public/browser_logo.png';
-import solunoLogo from '../../public/soluno_logo.png';
-import telegramLogo from '../../public/telegram_logo.png';
-import xLogo from '../../public/x_logo.png';
-import styles from './styles/page.module.scss';
+import Button from "@/components/Button/Button";
+import LogoLink from "@/components/LogoLink/LogoLink";
+import Image from "next/image";
+import Link from "next/link";
+import browserLogo from "../../public/browser_logo.png";
+import solunoLogo from "../../public/soluno_logo.png";
+import telegramLogo from "../../public/telegram_logo.png";
+import xLogo from "../../public/x_logo.png";
+import styles from "./styles/page.module.scss";
 
 export default function Home() {
   return (
@@ -74,7 +74,7 @@ export default function Home() {
                 <LogoLink
                   logo={xLogo}
                   alt="X (Twitter) Logo"
-                  href="https://twitter.com/solunocoin"
+                  href="https://twitter.com/soluno_coin"
                 />
                 <LogoLink
                   logo={browserLogo}

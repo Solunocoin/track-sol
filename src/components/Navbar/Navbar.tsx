@@ -36,7 +36,7 @@ const Navbar = () => {
         <NavbarSearch />
         <div className={styles.navbarLinks}>
           <LogoLink
-            href="https://t.me/solunocoin"
+            href="https://t.me/track_sol"
             logo={telegramLogo}
             alt="Telegram logo"
           />
@@ -45,12 +45,12 @@ const Navbar = () => {
             logo={xLogo}
             alt="X (twitter) logo"
           /> */}
-
+{/* 
           <LogoLink
             logo={browserLogo}
             alt="Website Logo"
             href="https://www.soluno.io/"
-          />
+          /> */}
         </div>
       </div>
     </div>
