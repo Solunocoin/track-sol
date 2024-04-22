@@ -1,4 +1,4 @@
-export async function fetchTokenData(tokenAddresses: string[]) {
+export async function getAllTokensDataDexScreener(tokenAddresses: string[]) {
   const maxAddressesPerRequest = 30;
   let results: DexScreenerPairType[] = [];
 

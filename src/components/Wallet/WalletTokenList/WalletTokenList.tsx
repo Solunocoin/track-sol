@@ -1,5 +1,5 @@
 import Divider from '@/components/Divider/Divider';
-import { fetchTokenData } from '@/utils/getAllTokens';
+import { getAllTokensDataDexScreener } from '@/utils/getAllTokens';
 import { getSolPrice } from '@/utils/getSolPrice';
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import { PublicKey } from '@solana/web3.js';
@@ -20,10 +20,6 @@ const WalletTokenList = async ({ walletAddress }: IWalletTokenList) => {
   );
 
   const solPrice = await getSolPrice();
-
-  console.log('solPrice', solPrice);
-
-  console.log('walletSolBalance', walletSolBalance / 10 ** 9);
 
   tokens.push({
     address: 'sol',
@@ -61,7 +57,7 @@ const WalletTokenList = async ({ walletAddress }: IWalletTokenList) => {
     (token) => token.account.data.parsed.info.mint,
   );
 
-  const allTokens = await fetchTokenData(tokenAddresses);
+  const allTokens = await getAllTokensDataDexScreener(tokenAddresses);
 
   allTokens.forEach((token) => {
     const tokenInfo = tokenAccountsFiltered.find(
@@ -104,7 +100,10 @@ const WalletTokenList = async ({ walletAddress }: IWalletTokenList) => {
           flexDirection: 'column',
         }}
       >
-        <WalletHeader tokens={allTokensMapSorted} walletAddress={walletAddress} />
+        <WalletHeader
+          tokens={allTokensMapSorted}
+          walletAddress={walletAddress}
+        />
 
         <div className={styles.walletListHeader}>
           <div>Token</div>
