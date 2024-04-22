@@ -87,7 +87,7 @@ const WalletTokenList = async ({ walletAddress }: IWalletTokenList) => {
   const filteredTokens = tokens.filter((token) => token.value > 0);
   const allTokensMapSorted = filteredTokens.sort((a, b) => b.value - a.value);
 
-  console.log('allTokensMapSorted', allTokensMapSorted);
+  // console.log('allTokensMapSorted', allTokensMapSorted);
 
   return (
     <div

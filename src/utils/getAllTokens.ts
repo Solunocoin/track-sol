@@ -69,6 +69,18 @@ export async function getAllTokensDataDexScreener(tokenAddresses: string[]) {
 
     results.push(...data); // assuming the API returns an array of results
   }
+  let filteredResults : DexScreenerPairType[] = [];
+  const seenAddresses  = new Set();
 
-  return results;
+  //Filter results based on address
+  filteredResults  = results.filter(bestPair=>{
+    if(!seenAddresses.has(bestPair.pairAddress)){
+      seenAddresses.add(bestPair.pairAddress)
+      return true;
+    }
+    return false;
+  }
+  )
+ 
+  return filteredResults;
 }

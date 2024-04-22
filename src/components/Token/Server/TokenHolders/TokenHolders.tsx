@@ -37,7 +37,7 @@ const TokenHolders = async ({ tokenAddress }: ITokenHolders) => {
       account: AccountInfo<Buffer | ParsedAccountData>;
     }[];
 
-    console.log('allHolders', allHolders);
+    // console.log('allHolders', allHolders);
 
     // @ts-ignore - data doesn't have parsed as a type
     const activeHolders = allHolders?.filter(

@@ -28,7 +28,7 @@ const TokenLinks = async ({ tokenAddress }: ITokenLinks) => {
       .nfts()
       .findByMint({ mintAddress: mintAddress });
     const extensions = token.json?.extensions;
-    console.log(extensions);
+    // console.log(extensions);
     if (extensions) {
       //@ts-ignore
       if (extensions.website) {
