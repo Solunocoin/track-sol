@@ -48,8 +48,8 @@ export async function getAllTokensDataDexScreener(tokenAddresses: string[]) {
       let bestPair: DexScreenerPairType | null = null;
 
       groups[tokenAddress].forEach((pair) => {
-        const liquidityUSD = pair.liquidity.usd;
-        if (liquidityUSD > highestLiquidityUSD) {
+        const liquidityUSD = pair?.liquidity?.usd;
+        if (liquidityUSD && liquidityUSD > highestLiquidityUSD) {
           highestLiquidityUSD = liquidityUSD;
           bestPair = pair;
         }

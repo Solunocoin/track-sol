@@ -69,17 +69,19 @@ const WalletTokenList = async ({ walletAddress }: IWalletTokenList) => {
 
     const tokenValue = tokenBalance * parseFloat(token.priceUsd);
 
-    tokens.push({
-      address: token.baseToken.address,
-      name: token.baseToken.name,
-      symbol: token.baseToken.symbol,
-      logo: token.info.imageUrl,
-      price: parseFloat(token.priceUsd),
-      priceChange: token.priceChange,
-      balance: tokenBalance,
-      value: tokenValue,
-      quoteToken: token.quoteToken,
-    });
+    if (tokenValue > 0.1) {
+      tokens.push({
+        address: token.baseToken?.address,
+        name: token.baseToken?.name,
+        symbol: token.baseToken?.symbol,
+        logo: token.info?.imageUrl,
+        price: parseFloat(token.priceUsd),
+        priceChange: token?.priceChange,
+        balance: tokenBalance,
+        value: tokenValue,
+        quoteToken: token?.quoteToken,
+      });
+    }
   });
 
   const filteredTokens = tokens.filter((token) => token.value > 0);
