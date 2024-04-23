@@ -137,13 +137,16 @@
     text-align: center; // Base style for mobile
   }
 
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-style: italic;
+    margin-bottom: 0.7em;
+  }
+
   @include bp-l {
     // Adjustments for larger screens
     padding: 2em;
-
-    h2 {
-      text-align: left;
-    }
   }
 }
 
@@ -306,10 +309,6 @@
     // Modifications for screens larger than 768px
     padding: 2em;
     margin: 0 auto 4em auto;
-
-    h1 {
-      text-align: left;
-    }
   }
 }
 

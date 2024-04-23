@@ -22,7 +22,7 @@ const WalletTokenList = async ({ walletAddress }: IWalletTokenList) => {
   const solPrice = await getSolPrice();
 
   tokens.push({
-    address: 'sol',
+    address: 'So11111111111111111111111111111111111111112',
     balance: walletSolBalance / 10 ** 9,
     name: 'Solana',
     symbol: 'SOL',

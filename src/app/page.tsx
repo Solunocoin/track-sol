@@ -1,12 +1,12 @@
-import Button from "@/components/Button/Button";
-import LogoLink from "@/components/LogoLink/LogoLink";
-import Image from "next/image";
-import Link from "next/link";
-import browserLogo from "../../public/browser_logo.png";
-import solunoLogo from "../../public/soluno_logo.png";
-import telegramLogo from "../../public/telegram_logo.png";
-import xLogo from "../../public/x_logo.png";
-import styles from "./styles/page.module.scss";
+import Button from '@/components/Button/Button';
+import LogoLink from '@/components/LogoLink/LogoLink';
+import Image from 'next/image';
+import Link from 'next/link';
+import browserLogo from '../../public/browser_logo.png';
+import solunoLogo from '../../public/soluno_logo.png';
+import telegramLogo from '../../public/telegram_logo.png';
+import xLogo from '../../public/x_logo.png';
+import styles from './styles/page.module.scss';
 
 export default function Home() {
   return (
@@ -45,7 +45,7 @@ export default function Home() {
           </div>
           <div className={styles.indexOverviewItemWrapper}>
             <div className={styles.indexOverviewItem}>
-              <h2>There is only one Soluno in the world </h2>
+              <h3>There is only one Soluno in the world </h3>
               <p>
                 Forget about cats and dogs. Be part of the new trend of memes
                 with Soluno. Soluno is a very unique coin with only 1 token in
@@ -53,9 +53,9 @@ export default function Home() {
               </p>
             </div>
             <div className={styles.indexOverviewItem}>
-              <h2>
+              <h3>
                 Our Goal: To become the most expensive asset in the world.
-              </h2>
+              </h3>
               <p>
                 With just one in existence, our aim is clear, make Soluno the
                 most expensive asset in the world. This exclusivity means
@@ -64,7 +64,7 @@ export default function Home() {
               </p>
             </div>
             <div className={styles.indexOverviewItem}>
-              <h2>Join a legacy and {`let's`} make history together!</h2>
+              <h3>Join a legacy and {`let's`} make history together!</h3>
               <div className={styles.indexOverviewItemLinks}>
                 <LogoLink
                   logo={telegramLogo}
