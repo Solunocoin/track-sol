@@ -23,7 +23,7 @@ export default async function getTokenPrice(
     };
 
     const response = await axios.get<TokenPriceResponse>(url, { headers });
-    console.log(response);
+    // console.log(response);
     if (response.data.success) {
       return response.data.data.value;
     } else {

@@ -40,37 +40,42 @@ const TokenDataInfo = async ({ tokenAddress, tokenBestPair }: ITokenInfoData) =>
         tokenLogo = tokenBestPair.info.imageUrl;
       }
     } catch (error) {
-      throw new Error('Error in fetching token logo');
+      console.log("Could not find token logo with metaplex, trying other method")
     }
   } else {
-    const provider = await new TokenListProvider().resolve();
-    const tokenList = provider.filterByChainId(ENV.MainnetBeta).getList();
-
-    const tokenMap = tokenList.reduce((map, item) => {
-      map.set(item.address, item);
-      return map;
-    }, new Map());
-
-    const token = tokenMap.get(mintAddress.toBase58());
-
-    if (token) {
-      tokenName = token.name;
-      tokenSymbol = token.symbol;
-
-      const logoFetch = await fetch(token.logoURI);
-
-      if (logoFetch.status === 200) {
-        tokenLogo = token.json?.image;
+    try{
+      const provider = await new TokenListProvider().resolve();
+      const tokenList = provider.filterByChainId(ENV.MainnetBeta).getList();
+  
+      const tokenMap = tokenList.reduce((map, item) => {
+        map.set(item.address, item);
+        return map;
+      }, new Map());
+  
+      const token = tokenMap.get(mintAddress.toBase58());
+  
+      if (token) {
+        tokenName = token.name;
+        tokenSymbol = token.symbol;
+  
+        const logoFetch = await fetch(token.logoURI);
+  
+        if (logoFetch.status === 200) {
+          tokenLogo = token.json?.image;
+        } else {
+          tokenLogo = tokenBestPair.info.imageUrl;
+        }
       } else {
+      
+  
+        tokenName = tokenBestPair.baseToken.name;
+        tokenSymbol = tokenBestPair.baseToken.symbol;
         tokenLogo = tokenBestPair.info.imageUrl;
       }
-    } else {
-    
-
-      tokenName = tokenBestPair.baseToken.name;
-      tokenSymbol = tokenBestPair.baseToken.symbol;
-      tokenLogo = tokenBestPair.info.imageUrl;
+    }catch(error){
+      console.log("Could not find logo, defaulting to question mark")
     }
+ 
   }
 
   return (
