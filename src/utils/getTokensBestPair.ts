@@ -18,6 +18,8 @@ const getTokensBestPair = async (
 
     const data: DexScreenerResponseType = await response.json();
 
+    console.log('data', data);
+
     if (data.pairs === null || data.pairs.length === 0) {
       return {
         data: null,
@@ -30,7 +32,7 @@ const getTokensBestPair = async (
     const pairs: DexScreenerPairType[] = data.pairs;
 
     const bestPair = pairs.reduce((prev, current) => {
-      return prev.liquidity.usd > current.liquidity.usd ? prev : current;
+      return prev?.liquidity?.usd < current?.liquidity?.usd ? current : prev;
     });
 
     return {
