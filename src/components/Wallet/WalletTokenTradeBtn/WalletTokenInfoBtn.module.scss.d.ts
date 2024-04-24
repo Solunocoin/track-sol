@@ -1,2 +1,2 @@
-export declare const tokenTradeBtn: string;
 export declare const tokenTradeBtnDisabled: string;
+export declare const walletTokenInfoBtn: string;

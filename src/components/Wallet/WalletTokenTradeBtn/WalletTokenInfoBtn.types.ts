@@ -1,4 +1,4 @@
-interface IWalletTokenTradeBtn {
+interface IWalletTokenInfoBtn {
   baseToken: string;
   quoteToken: string;
 }

@@ -1,13 +1,13 @@
 @import '../../../scss/breakpoints';
 
-.tokenTradeBtn {
+.walletTokenInfoBtn {
   position: relative;
-  margin-bottom: 1rem;
   min-height: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
   color: #fff;
   border: none;
   transition: 0.3s;
