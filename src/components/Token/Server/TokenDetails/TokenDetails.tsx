@@ -9,6 +9,7 @@ import TokenPrice from "../../Client/TokenPrice/TokenPrice";
 import TokenTradeBtn from "../../Client/TokenTradeBtn/TokenTradeBtn";
 import TokenDetailsContainer from "../../Client/TokenDetailsContainer/TokenDetailsContainer";
 import styles from "./TokenDetails.module.scss";
+import { W_SOLANA_ADDRESS } from "@/global";
 
 const TokenDetails = async ({ tokenAddress, tokenBestPair }: ITokenDetails) => {
   const supply = await solana.getTokenSupply(new PublicKey(tokenAddress));
@@ -16,7 +17,7 @@ const TokenDetails = async ({ tokenAddress, tokenBestPair }: ITokenDetails) => {
   let totalSupply = supply.value.uiAmount;
 
   if (!totalSupply) {
-    if (tokenAddress == "So11111111111111111111111111111111111111112") {
+    if (tokenAddress == W_SOLANA_ADDRESS) {
       const solSupply = await solana.getSupply();
       totalSupply = solSupply.value.total / 1e9;
     } else {

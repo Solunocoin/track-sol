@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import TokenHolders from '../../Server/TokenHolders/TokenHolders';
-import Token24hVolume from '../Token24hVolume/Token24hVolume';
+import Token24hVolume from '../../Server/Token24hVolume/Token24hVolume';
 import TokenLiquidity from '../TokenLiquidity/TokenLiquidity';
 import styles from './TokenMoreDetails.module.scss';
 

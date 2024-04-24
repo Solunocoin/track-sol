@@ -3,9 +3,10 @@ import isNumeric from "@/utils/isNumeric";
 import { AccountInfo, ParsedAccountData, PublicKey } from "@solana/web3.js";
 import puppeteer from "puppeteer";
 import { solana } from "../../../../../lib/solana";
+import { W_SOLANA_ADDRESS } from "@/global";
 const TokenHolders = async ({ tokenAddress }: ITokenHolders) => {
   let holdersText = `Unavailable`;
-  if (tokenAddress == "So11111111111111111111111111111111111111112") {
+  if (tokenAddress == W_SOLANA_ADDRESS) {
     holdersText = "Not Available";
   } else {
     try {
@@ -14,7 +15,7 @@ const TokenHolders = async ({ tokenAddress }: ITokenHolders) => {
       );
 
       const allHolders = (await Promise.race([
-        await solana.getParsedProgramAccounts(accountInfo?.owner as PublicKey, {
+        solana.getParsedProgramAccounts(accountInfo?.owner as PublicKey, {
           commitment: "confirmed",
           filters: [
             {
@@ -30,6 +31,7 @@ const TokenHolders = async ({ tokenAddress }: ITokenHolders) => {
         }),
         new Promise((_, reject) =>
           setTimeout(() => {
+            console.log("DIDIEDIEDIE");
             reject(new Error("Request timed out"));
             return [];
           }, 3000)

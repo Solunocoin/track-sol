@@ -5,6 +5,7 @@ import { PublicKey } from "@solana/web3.js";
 import { QuestionCircle } from "react-bootstrap-icons";
 import { solana } from "../../../../../lib/solana";
 import styles from "./TokenInfoData.module.scss";
+import { W_SOLANA_ADDRESS } from "@/global";
 
 const TokenDataInfo = async ({
   tokenAddress,
@@ -25,7 +26,7 @@ const TokenDataInfo = async ({
 
   const metadataAccountInfo = await solana.getAccountInfo(metadataAccount);
   console.log("mtad", metadataAccountInfo);
-  if (tokenAddress == "So11111111111111111111111111111111111111112") {
+  if (tokenAddress == W_SOLANA_ADDRESS) {
     tokenName = "Solana";
     tokenSymbol = "SOL";
     tokenLogo =
