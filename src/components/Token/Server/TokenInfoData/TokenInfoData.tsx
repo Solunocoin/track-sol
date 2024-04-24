@@ -1,13 +1,15 @@
+import truncateString from "@/utils/truncateString";
+import { Metaplex } from "@metaplex-foundation/js";
+import { ENV, TokenListProvider } from "@solana/spl-token-registry";
+import { PublicKey } from "@solana/web3.js";
+import { QuestionCircle } from "react-bootstrap-icons";
+import { solana } from "../../../../../lib/solana";
+import styles from "./TokenInfoData.module.scss";
 
-import truncateString from '@/utils/truncateString';
-import { Metaplex } from '@metaplex-foundation/js';
-import { ENV, TokenListProvider } from '@solana/spl-token-registry';
-import { PublicKey } from '@solana/web3.js';
-import { QuestionCircle } from 'react-bootstrap-icons';
-import { solana } from '../../../../../lib/solana';
-import styles from './TokenInfoData.module.scss';
-
-const TokenDataInfo = async ({ tokenAddress, tokenBestPair }: ITokenInfoData) => {
+const TokenDataInfo = async ({
+  tokenAddress,
+  tokenBestPair,
+}: ITokenInfoData) => {
   const metaplex = Metaplex.make(solana);
 
   const mintAddress = new PublicKey(tokenAddress);
@@ -22,12 +24,17 @@ const TokenDataInfo = async ({ tokenAddress, tokenBestPair }: ITokenInfoData) =>
     .metadata({ mint: mintAddress });
 
   const metadataAccountInfo = await solana.getAccountInfo(metadataAccount);
-
-  if (metadataAccountInfo) {
+  console.log("mtad", metadataAccountInfo);
+  if (tokenAddress == "So11111111111111111111111111111111111111112") {
+    tokenName = "Solana";
+    tokenSymbol = "SOL";
+    tokenLogo =
+      "https://api.phantom.app/image-proxy/?image=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2Fsolana-labs%2Ftoken-list%40main%2Fassets%2Fmainnet%2FSo11111111111111111111111111111111111111112%2Flogo.png&fit=cover&width=256&height=256";
+  } else if (metadataAccountInfo) {
     const token = await metaplex
       .nfts()
       .findByMint({ mintAddress: mintAddress });
-
+    console.log("metaplex", token);
     tokenName = token.name;
     tokenSymbol = token.symbol;
 
@@ -40,42 +47,41 @@ const TokenDataInfo = async ({ tokenAddress, tokenBestPair }: ITokenInfoData) =>
         tokenLogo = tokenBestPair.info.imageUrl;
       }
     } catch (error) {
-      console.log("Could not find token logo with metaplex, trying other method")
+      console.log(
+        "Could not find token logo with metaplex, trying other method"
+      );
     }
   } else {
-    try{
+    try {
       const provider = await new TokenListProvider().resolve();
       const tokenList = provider.filterByChainId(ENV.MainnetBeta).getList();
-  
+
       const tokenMap = tokenList.reduce((map, item) => {
         map.set(item.address, item);
         return map;
       }, new Map());
-  
+
       const token = tokenMap.get(mintAddress.toBase58());
-  
+
       if (token) {
         tokenName = token.name;
         tokenSymbol = token.symbol;
-  
+
         const logoFetch = await fetch(token.logoURI);
-  
+
         if (logoFetch.status === 200) {
           tokenLogo = token.json?.image;
         } else {
           tokenLogo = tokenBestPair.info.imageUrl;
         }
       } else {
-      
-  
         tokenName = tokenBestPair.baseToken.name;
         tokenSymbol = tokenBestPair.baseToken.symbol;
         tokenLogo = tokenBestPair.info.imageUrl;
       }
-    }catch(error){
-      console.log("Could not find logo, defaulting to question mark")
+    } catch (error) {
+      console.log("Could not find logo, defaulting to question mark");
     }
- 
   }
 
   return (

@@ -9,6 +9,7 @@ const getTokensBestPair = async (
   tokenAddress: string,
 ): Promise<GetTokensBestPairType> => {
   try {
+    
     const response = await fetch(
       `https://api.dexscreener.com/latest/dex/tokens/${tokenAddress}`,
       {

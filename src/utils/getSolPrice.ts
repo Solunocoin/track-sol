@@ -7,6 +7,5 @@ export async function getSolPrice() {
   const data = await response.json();
   const price = data.solana.usd; // Price of Solana in USD
   const change24h = data.solana.usd_24h_change; // 24h price change percentage of Solana
-
   return { price, change24h };
 }
