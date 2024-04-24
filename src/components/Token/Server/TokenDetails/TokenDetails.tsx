@@ -1,5 +1,5 @@
 import formatNumber from "@/utils/formatNumber";
-import { PublicKey } from "@metaplex-foundation/js";
+import { PublicKey, sol } from "@metaplex-foundation/js";
 import { Suspense } from "react";
 import Skeleton from "react-loading-skeleton";
 import { solana } from "../../../../../lib/solana";
@@ -9,13 +9,20 @@ import TokenPrice from "../../Client/TokenPrice/TokenPrice";
 import TokenTradeBtn from "../../Client/TokenTradeBtn/TokenTradeBtn";
 import TokenDetailsContainer from "../../Client/TokenDetailsContainer/TokenDetailsContainer";
 import styles from "./TokenDetails.module.scss";
+import { W_SOLANA_ADDRESS } from "@/global";
 
 const TokenDetails = async ({ tokenAddress, tokenBestPair }: ITokenDetails) => {
   const supply = await solana.getTokenSupply(new PublicKey(tokenAddress));
-  const totalSupply = supply.value.uiAmount;
+
+  let totalSupply = supply.value.uiAmount;
 
   if (!totalSupply) {
-    return null;
+    if (tokenAddress == W_SOLANA_ADDRESS) {
+      const solSupply = await solana.getSupply();
+      totalSupply = solSupply.value.total / 1e9;
+    } else {
+      return null;
+    }
   }
 
   return (
