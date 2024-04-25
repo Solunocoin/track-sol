@@ -1,12 +1,12 @@
-import Button from '@/components/Button/Button';
-import LogoLink from '@/components/LogoLink/LogoLink';
-import Image from 'next/image';
-import Link from 'next/link';
-import browserLogo from '../../public/browser_logo.png';
-import solunoLogo from '../../public/soluno_logo.png';
-import telegramLogo from '../../public/telegram_logo.png';
-import xLogo from '../../public/x_logo.png';
-import styles from './styles/page.module.scss';
+import Button from "@/components/Button/Button";
+import LogoLink from "@/components/LogoLink/LogoLink";
+import Image from "next/image";
+import Link from "next/link";
+import browserLogo from "../../public/browser_logo.png";
+import solunoLogo from "../../public/soluno_logo.png";
+import telegramLogo from "../../public/telegram_logo.png";
+import xLogo from "../../public/x_logo.png";
+import styles from "./styles/page.module.scss";
 
 export default function Home() {
   return (
@@ -59,7 +59,7 @@ export default function Home() {
               <p>
                 With just one in existence, our aim is clear, make Soluno the
                 most expensive asset in the world. This exclusivity means
-                {`Soluno's`} price can soar to unprecedented heights, making
+                {` Soluno's`} price can soar to unprecedented heights, making
                 history and headlines along the way.
               </p>
             </div>
