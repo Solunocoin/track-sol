@@ -6,13 +6,12 @@ import websiteLogo from "../../../../../public/browser_logo.png";
 import twitterLogo from "../../../../../public/x_logo.png";
 import telegramLogo from "../../../../../public/telegram_logo.png";
 import styles from "./TokenLinks.module.scss";
-import { Metaplex, PublicKey } from "@metaplex-foundation/js";
+import { Metaplex, PublicKey, token } from "@metaplex-foundation/js";
 import { solana } from "../../../../../lib/solana";
+import { getDexScreenerSocials } from "@/utils/getDexScreenrSocials";
 const TokenLinks = async ({ tokenAddress }: ITokenLinks) => {
   const metaplex = Metaplex.make(solana);
-
   const mintAddress = new PublicKey(tokenAddress);
-
   let twitterLink;
   let websiteLink;
   let telegramLink;
@@ -24,6 +23,7 @@ const TokenLinks = async ({ tokenAddress }: ITokenLinks) => {
   const metadataAccountInfo = await solana.getAccountInfo(metadataAccount);
 
   if (metadataAccountInfo) {
+
     const token = await metaplex
       .nfts()
       .findByMint({ mintAddress: mintAddress });
@@ -44,6 +44,27 @@ const TokenLinks = async ({ tokenAddress }: ITokenLinks) => {
       if (extensions.telegram) {
         //@ts-ignore
         telegramLink = extensions.telegram;
+      }
+    }
+  }
+
+  if (!websiteLink || !telegramLink || !twitterLink) {
+    const socials = await getDexScreenerSocials(tokenAddress);
+    if (Object.keys(socials).length > 0) {
+      //@ts-ignore
+      if (socials.website) {
+        //@ts-ignore
+        websiteLink = socials.website;
+      }
+      //@ts-ignore
+      if (socials.twitter) {
+        //@ts-ignore
+        twitterLink = socials.twitter;
+      }
+      //@ts-ignore
+      if (socials.telegram) {
+        //@ts-ignore
+        telegramLink = socials.telegram;
       }
     }
   }
