@@ -25,7 +25,7 @@ export default function Home() {
               through a simple, easy-to-use dashboard.
             </p>
             <div className={styles.indexLaunchButtonWrapper}>
-              <Link href="/token">
+              <Link href="/search">
                 <Button>LAUNCH APP</Button>
               </Link>
             </div>
