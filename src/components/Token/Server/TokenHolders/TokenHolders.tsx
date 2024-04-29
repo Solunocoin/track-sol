@@ -4,10 +4,10 @@ import isNumeric from "@/utils/isNumeric";
 import { AccountInfo, ParsedAccountData, PublicKey } from "@solana/web3.js";
 import puppeteer from "puppeteer";
 import { solana } from "../../../../../lib/solana";
-export const maxDuration = 30;
 
 const TokenHolders = async ({ tokenAddress }: ITokenHolders) => {
   let holdersText = `Unavailable`;
+
   if (tokenAddress == W_SOLANA_ADDRESS) {
     holdersText = "Not Available";
   } else {
@@ -59,9 +59,12 @@ const TokenHolders = async ({ tokenAddress }: ITokenHolders) => {
       console.log("ERROR", error);
       try {
         const url = `https://solscan.io/token/${tokenAddress}`;
+        console.log("Hate1");
         const browser = await puppeteer.launch();
-        const page = await browser.newPage();
+        console.log("Hate2");
 
+        const page = await browser.newPage();
+        console.log("Hate3");
         if (!page) {
           throw new Error("Page not found");
         }
