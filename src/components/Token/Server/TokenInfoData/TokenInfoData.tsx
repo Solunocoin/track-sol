@@ -25,7 +25,7 @@ const TokenDataInfo = async ({
     .metadata({ mint: mintAddress });
 
   const metadataAccountInfo = await solana.getAccountInfo(metadataAccount);
-  console.log("mtad", metadataAccountInfo);
+  // console.log("mtad", metadataAccountInfo);
   if (tokenAddress == W_SOLANA_ADDRESS) {
     tokenName = "Solana";
     tokenSymbol = "SOL";
@@ -35,7 +35,7 @@ const TokenDataInfo = async ({
     const token = await metaplex
       .nfts()
       .findByMint({ mintAddress: mintAddress });
-    console.log("metaplex", token);
+    // console.log("metaplex", token);
     tokenName = token.name;
     tokenSymbol = token.symbol;
 
