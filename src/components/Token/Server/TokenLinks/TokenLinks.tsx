@@ -8,11 +8,10 @@ import telegramLogo from "../../../../../public/telegram_logo.png";
 import styles from "./TokenLinks.module.scss";
 import { Metaplex, PublicKey } from "@metaplex-foundation/js";
 import { solana } from "../../../../../lib/solana";
-const TokenLinks = async ({ tokenAddress }: ITokenLinks) => {
+import reduceSocials from "@/utils/reduceSocialsDict";
+const TokenLinks = async ({ tokenAddress, tokenBestPair }: ITokenLinks) => {
   const metaplex = Metaplex.make(solana);
-
   const mintAddress = new PublicKey(tokenAddress);
-
   let twitterLink;
   let websiteLink;
   let telegramLink;
@@ -44,6 +43,27 @@ const TokenLinks = async ({ tokenAddress }: ITokenLinks) => {
       if (extensions.telegram) {
         //@ts-ignore
         telegramLink = extensions.telegram;
+      }
+    }
+  }
+
+  if (!websiteLink || !telegramLink || !twitterLink) {
+    const socials = reduceSocials(tokenBestPair.info.socials);
+    if (socials) {
+      //@ts-ignore
+      if (socials.website) {
+        //@ts-ignore
+        websiteLink = socials.website;
+      }
+      //@ts-ignore
+      if (socials.twitter) {
+        //@ts-ignore
+        twitterLink = socials.twitter;
+      }
+      //@ts-ignore
+      if (socials.telegram) {
+        //@ts-ignore
+        telegramLink = socials.telegram;
       }
     }
   }

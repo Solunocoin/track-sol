@@ -59,7 +59,7 @@ export default function Home() {
               <p>
                 With just one in existence, our aim is clear, make Soluno the
                 most expensive asset in the world. This exclusivity means
-                {`Soluno's`} price can soar to unprecedented heights, making
+                {` Soluno's`} price can soar to unprecedented heights, making
                 history and headlines along the way.
               </p>
             </div>
