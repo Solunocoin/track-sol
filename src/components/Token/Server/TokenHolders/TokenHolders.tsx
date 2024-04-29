@@ -4,6 +4,8 @@ import isNumeric from '@/utils/isNumeric';
 import { AccountInfo, ParsedAccountData, PublicKey } from '@solana/web3.js';
 import puppeteer from 'puppeteer';
 import { solana } from '../../../../../lib/solana';
+export const maxTimeout = 30;
+
 const TokenHolders = async ({ tokenAddress }: ITokenHolders) => {
   let holdersText = `Unavailable`;
   if (tokenAddress == W_SOLANA_ADDRESS) {
@@ -15,7 +17,7 @@ const TokenHolders = async ({ tokenAddress }: ITokenHolders) => {
       );
 
       const allHolders = (await Promise.race([
-        solana.getParsedProgramAccounts(accountInfo?.owner as PublicKey, {
+      await solana.getParsedProgramAccounts(accountInfo?.owner as PublicKey, {
           commitment: 'confirmed',
           filters: [
             {
