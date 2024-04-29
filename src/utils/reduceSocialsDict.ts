@@ -1,5 +1,7 @@
 function reduceSocials(socials: DesxScreenerSocials[]): Record<string, string> {
-    return socials.reduce((acc: Record<string, string>, link: DesxScreenerSocials) => {
+  
+  return socials.reduce((acc: Record<string, string>, link: DesxScreenerSocials) => {
+     
       // Always update the type key with the current link's URL
       acc[link.type] = link.url;
       return acc;

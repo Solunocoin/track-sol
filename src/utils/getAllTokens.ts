@@ -73,9 +73,9 @@ export async function getAllTokensDataDexScreener(tokenAddresses: string[]) {
   let filteredResults : DexScreenerPairType[] = [];
   const seenAddresses  = new Set();
   results.sort((a,b) => b.liquidity.usd - a.liquidity.usd)
-  results.forEach((e) =>{
-    console.log(e.liquidity.usd)
-  })
+  // results.forEach((e) =>{
+  //   // console.log(e.liquidity.usd)
+  // })
   //Filter results based on address
   filteredResults  = results.filter(bestPair=>{
     if(!seenAddresses.has(bestPair.baseToken.address)){

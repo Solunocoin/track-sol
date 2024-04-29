@@ -29,7 +29,7 @@ const tokenAddress = async ({ params }: Props) => {
           tokenAddress={params.tokenAddress}
           tokenBestPair={bestPair.data}
         />
-        <TokenLinks tokenAddress={params.tokenAddress} />
+        <TokenLinks tokenBestPair={bestPair.data} tokenAddress={params.tokenAddress} />
         <TokenMoreDetails
           tokenAddress={params.tokenAddress}
           tokenBestPair={bestPair.data}

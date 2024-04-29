@@ -46,8 +46,11 @@ const TokenLinks = async ({ tokenAddress, tokenBestPair }: ITokenLinks) => {
       }
     }
   }
-
-  if (!websiteLink || !telegramLink || !twitterLink) {
+  console.log("TBSP", tokenBestPair);
+  if (
+    tokenBestPair.info && tokenBestPair.info.socials && 
+    (!websiteLink || !telegramLink || !twitterLink)
+  ) {
     const socials = reduceSocials(tokenBestPair.info.socials);
     if (socials) {
       //@ts-ignore

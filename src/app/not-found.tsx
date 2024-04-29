@@ -1,10 +1,7 @@
-"use client";
-import { useRouter } from "next/navigation";
 
 const NotFound = () => {
-  const router = useRouter();
-  router.push("/search");
-  return <></>;
+
+  return <>Not found</>;
 };
 
 export default NotFound;
