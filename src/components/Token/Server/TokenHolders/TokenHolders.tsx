@@ -10,6 +10,7 @@ const TokenHolders = async ({ tokenAddress }: ITokenHolders) => {
   let holdersText = `Unavailable`;
   if (tokenAddress == W_SOLANA_ADDRESS) {
     holdersText = "Not Available";
+    
   } else {
     try {
       const accountInfo = await solana.getAccountInfo(
