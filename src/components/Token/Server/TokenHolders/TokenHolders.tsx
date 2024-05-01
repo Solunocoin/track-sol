@@ -35,7 +35,7 @@ const TokenHolders = async ({ tokenAddress }: ITokenHolders) => {
           setTimeout(() => {
             reject(new Error("Request timed out"));
             return [];
-          }, 3000)
+          }, 14000)
         ),
       ])) as {
         pubkey: PublicKey;
@@ -57,58 +57,58 @@ const TokenHolders = async ({ tokenAddress }: ITokenHolders) => {
       // const holders = await getTokenHolders(tokenAddress);
     } catch (error) {
       console.log("ERROR", error);
-      try {
-        const url = `https://solscan.io/token/${tokenAddress}`;
-        console.log("Hate1");
-        const browser = await puppeteer.launch();
-        console.log("Hate2");
+      // try {
+      //   const url = `https://solscan.io/token/${tokenAddress}`;
+      //   console.log("Hate1");
+      //   const browser = await puppeteer.launch();
+      //   console.log("Hate2");
 
-        const page = await browser.newPage();
-        console.log("Hate3");
-        if (!page) {
-          throw new Error("Page not found");
-        }
+      //   const page = await browser.newPage();
+      //   console.log("Hate3");
+      //   if (!page) {
+      //     throw new Error("Page not found");
+      //   }
 
-        const pageVerify = await page.goto(url, { waitUntil: "networkidle0" });
+      //   const pageVerify = await page.goto(url, { waitUntil: "networkidle0" });
 
-        if (!pageVerify) {
-          throw new Error("Page not found");
-        }
+      //   if (!pageVerify) {
+      //     throw new Error("Page not found");
+      //   }
 
-        await page.waitForSelector("#__next", {
-          visible: true,
-        });
+      //   await page.waitForSelector("#__next", {
+      //     visible: true,
+      //   });
 
-        // Extract some data or perform actions
-        const result = await page.evaluate(() => {
-          const firstChildDiv = document.querySelector(
-            "#__next > div"
-          ) as HTMLElement;
+      //   // Extract some data or perform actions
+      //   const result = await page.evaluate(() => {
+      //     const firstChildDiv = document.querySelector(
+      //       "#__next > div"
+      //     ) as HTMLElement;
 
-          const text = firstChildDiv?.innerText;
+      //     const text = firstChildDiv?.innerText;
 
-          const lines = text.split("\n"); // Splitting text into lines
-          let holdersLineIndex = lines.findIndex((line) =>
-            line.includes("Holders")
-          ); // Find index of the line containing 'Holders'
-          return holdersLineIndex !== -1
-            ? lines[holdersLineIndex + 1].trim()
-            : "Holders data not found"; // Return the next line if found
-        });
+      //     const lines = text.split("\n"); // Splitting text into lines
+      //     let holdersLineIndex = lines.findIndex((line) =>
+      //       line.includes("Holders")
+      //     ); // Find index of the line containing 'Holders'
+      //     return holdersLineIndex !== -1
+      //       ? lines[holdersLineIndex + 1].trim()
+      //       : "Holders data not found"; // Return the next line if found
+      //   });
 
-        if (isNumeric(result)) {
-          holdersText = result;
-        } else {
-          throw new Error("Holders data not found");
-        }
-      } catch (error) {
-        try {
-          const holders = await getTokenHolders(tokenAddress);
-          holdersText = holders.length.toString();
-        } catch (error) {
-          holdersText = "Unavailable";
-        }
-      }
+      //   if (isNumeric(result)) {
+      //     holdersText = result;
+      //   } else {
+      //     throw new Error("Holders data not found");
+      //   }
+      // } catch (error) {
+      //   try {
+      //     const holders = await getTokenHolders(tokenAddress);
+      //     holdersText = holders.length.toString();
+      //   } catch (error) {
+      //     holdersText = "Unavailable";
+      //   }
+      // }
     }
   }
 
