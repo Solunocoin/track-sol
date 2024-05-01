@@ -35,7 +35,7 @@ const TokenHolders = async ({ tokenAddress }: ITokenHolders) => {
           setTimeout(() => {
             reject(new Error("Request timed out"));
             return [];
-          }, 13000)
+          }, 10000)
         ),
       ])) as {
         pubkey: PublicKey;
